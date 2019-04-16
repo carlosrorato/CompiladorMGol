@@ -14,7 +14,16 @@
 # e Larissa Santos de Azevedo
 
 
-####python retorna string vazia - read
-#### while 1:
-####    char = file.read(1)          # read by character
-####    if not char: break
+def analisadorLexico(arquivo):
+
+    ##Leitura caractere a caractere
+    while 1:
+        char = arq.read(1)
+        print(char)
+        if not char: break
+
+
+#para testes
+arq = open("./teste.mgol", encoding="utf8")
+analisadorLexico(arq)
+arq.close()
