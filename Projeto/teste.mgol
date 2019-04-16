@@ -1,9 +1,11 @@
+{este eh um programa teste em Mgol}
+
 inicio
-   varinicio
-      A literal;
-      B inteiro;
-      c inteiro;
-   varfim;
+    varinicio
+        A literal;
+        B inteiro;
+        c inteiro;
+    varfim;
 
    escreva "Digite um nome:";
    leia A;

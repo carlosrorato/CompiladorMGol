@@ -49,24 +49,25 @@ def verifica_token_dfa(estado):
         token = "PT_V"
     return token
 
+
+
+
 def analisadorLexico(arquivo):
     tupla = {"lexema": "", "token": "", "tipo": "null"}
 
     char = arquivo.read(1)
 
     estado = 0
-    flag = True
 
     if not char: # chegou ao final do arquivo
         return {"lexema":"EOF", "token":"EOF", "tipo":"null"}
     else:
-        while(flag):
+        while True:
             estado_aux = verifica_tabela_dfa(char, estado)
             estado = estado_aux
 
-            if estado == -1:
+            if estado == -1: #Ou seja, não existem transições
                 return tupla
-                flag = False
                 ## Tem que retornar aqui o carro de leitura para a posição lá que deu início ao erro
 
             elif TabelaTransicao[estado].get("final"):# se é estado final
@@ -75,14 +76,10 @@ def analisadorLexico(arquivo):
                 tupla ={"lexema": lexema, "token": token, "tipo": "null"}
 
             else:
-                if char != " " and char != "\n" and char != "\t":
-                    lexema = tupla.get("lexema") + char
-                    tupla["lexema"] = lexema
+                lexema = tupla.get("lexema") + char
+                tupla["lexema"] = lexema
 
             char = arquivo.read(1)
-
-
-
 
 
 ## Testando
