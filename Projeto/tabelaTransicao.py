@@ -41,12 +41,12 @@ def preenche_tabela_dfa(Tabela_Transicao):
 
     #estado 0 - estadoInicial:
     linha = {}
+    linha.update({"final": False})
     for c in string.ascii_letters:
         linha.update({c:estadoId})
     for c in range(0,10):
         linha.update({str(c):estadoNum})
-    linha.update({"\n":estadoInicial , "\_":estadoInicial , "\t": estadoInicial})
-    linha.update({"final": False})
+    linha.update({"\n":estadoInicial , string.whitespace : estadoInicial , "\t": estadoInicial})
     linha.update({"\"": estadoLiteral})
     linha.update({"{":estadoComentario})
     linha.update({"<":estadoOPRMenor , ">":estadoOPRMaior , "=":estadoOPRIgual})
