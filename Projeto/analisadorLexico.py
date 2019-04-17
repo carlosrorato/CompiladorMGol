@@ -59,30 +59,28 @@ def analisadorLexico(arquivo):
 
     estado = 0
 
-    if not char: # chegou ao final do arquivo
-        return {"lexema":"EOF", "token":"EOF", "tipo":"null"}
-    else:
-        while True:
-            estado_aux = verifica_tabela_dfa(char, estado)
-            estado = estado_aux
+    while True:
+        estado_aux = verifica_tabela_dfa(char, estado)
+        estado = estado_aux
 
-            if estado == -1: #Ou seja, não existem transições
-                if not char:  # chegou ao final do arquivo
-                    return {"lexema": "EOF", "token": "EOF", "tipo": "null"}
-                elif char != " " and char != "\n" and char != "\t":
-                    arquivo.seek(arquivo.tell()-1)
-                    return tupla
+        if estado == -1: #Ou seja, não existem mais transições
+            if not char:  # chegou ao final do arquivo
+                return {"lexema": "EOF", "token": "EOF", "tipo": "null"}
 
-            elif TabelaTransicao[estado].get("final"):# se é estado final
-                lexema = tupla.get("lexema") + char
-                token = verifica_token_dfa(estado)
-                tupla ={"lexema": lexema, "token": token, "tipo": "null"}
+            elif char != " " and char != "\n" and char != "\t":
+                arquivo.seek(arquivo.tell()-1) #volta o carro de leitura
+                return tupla
 
-            else:
-                lexema = tupla.get("lexema") + char
-                tupla["lexema"] = lexema
+        elif TabelaTransicao[estado].get("final"):# se é estado final
+            lexema = tupla.get("lexema") + char
+            token = verifica_token_dfa(estado)
+            tupla ={"lexema": lexema, "token": token, "tipo": "null"}
 
-            char = arquivo.read(1)
+        else:
+            lexema = tupla.get("lexema") + char
+            tupla["lexema"] = lexema
+
+        char = arquivo.read(1)
 
 
 ## Testando
