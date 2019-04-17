@@ -67,8 +67,11 @@ def analisadorLexico(arquivo):
             estado = estado_aux
 
             if estado == -1: #Ou seja, não existem transições
-                return tupla
-                ## Tem que retornar aqui o carro de leitura para a posição lá que deu início ao erro
+                if not char:  # chegou ao final do arquivo
+                    return {"lexema": "EOF", "token": "EOF", "tipo": "null"}
+                elif char != " " and char != "\n" and char != "\t":
+                    arquivo.seek(arquivo.tell()-1)
+                    return tupla
 
             elif TabelaTransicao[estado].get("final"):# se é estado final
                 lexema = tupla.get("lexema") + char
@@ -95,6 +98,7 @@ arq = open("./teste.mgol", encoding="utf8")
 while(1):
     resultado = analisadorLexico(arq)
     if resultado.get("token") == "EOF":
+        print(resultado)
         break
     else:
         print(resultado)
