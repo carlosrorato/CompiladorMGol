@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-# Universidade Federal de Goia
-# s
+# Universidade Federal de Goias
 # Instituto de Informática - INF
 # Compiladores - Compilador para MGol
 #
