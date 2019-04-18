@@ -1,4 +1,6 @@
-# Universidade Federal de Goiás
+# -*- coding: utf-8 -*-
+#--
+# # Universidade Federal de Goiás
 # Instituto de Informática - INF
 # Compiladores - Compilador para MGol
 #
@@ -21,7 +23,7 @@ preenche_tabela_dfa(TabelaTransicao)
 
 def verifica_tabela_dfa(caractere, estado_atual):
     prox_estado = TabelaTransicao[estado_atual].get(caractere)
-    if prox_estado:
+    if prox_estado != None:
         return prox_estado
     else:
         return -1
@@ -59,17 +61,25 @@ def analisadorLexico(arquivo):
 
     estado = 0
 
+    if not char:  # chegou ao final do arquivo
+        return {"lexema": "EOF", "token": "EOF", "tipo": "null"}
+
     while True:
         estado_aux = verifica_tabela_dfa(char, estado)
         estado = estado_aux
 
         if estado == -1: #Ou seja, não existem mais transições
-            if not char:  # chegou ao final do arquivo
-                return {"lexema": "EOF", "token": "EOF", "tipo": "null"}
+            
+            if not char:  # ultimo token
+                return tupla
 
             elif char != " " and char != "\n" and char != "\t":
+                if tupla['lexema'] == '':
+                    return {"lexema": char, "token": "ERROOOOU BIXO", "tipo": "null"}
                 arquivo.seek(arquivo.tell()-1) #volta o carro de leitura
                 return tupla
+            
+        
 
         elif TabelaTransicao[estado].get("final"):# se é estado final
             lexema = tupla.get("lexema") + char
@@ -77,10 +87,12 @@ def analisadorLexico(arquivo):
             tupla ={"lexema": lexema, "token": token, "tipo": "null"}
 
         else:
-            lexema = tupla.get("lexema") + char
-            tupla["lexema"] = lexema
+            if char != " " and char != "\n" and char != "\t":
+                lexema = tupla.get("lexema") + char
+                tupla["lexema"] = lexema
 
         char = arquivo.read(1)
+
 
 
 ## Testando
@@ -92,7 +104,7 @@ def analisadorLexico(arquivo):
 #    print("Estado:" + str(i) + " " + str(TabelaTransicao[i]) + "\n")
 #    i+=1
 
-arq = open("./teste.mgol", encoding="utf8")
+arq = open("./teste.mgol", encoding="utf-8")
 while(1):
     resultado = analisadorLexico(arq)
     if resultado.get("token") == "EOF":
