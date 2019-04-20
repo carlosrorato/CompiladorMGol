@@ -131,6 +131,8 @@ def preenche_tabela_dfa(Tabela_Transicao):
     for c in string.printable:
         if c != "\"":
             linha.update({c:estadoComentario})
+    linha.update({"\n": estadoComentario})
+    linha.update({"\t": estadoComentario})
     linha.update({"}": estadoComentarioFinal})
     Tabela_Transicao.append(linha)
 
