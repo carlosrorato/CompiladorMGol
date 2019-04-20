@@ -28,7 +28,6 @@ argumentos = sys.argv
 
 arq = open(argumentos[1], encoding="utf-8")
 
-
 while(1):
     resultado = analisadorLexico(arq, TabelaTransicao, TabelaSimbolos)
     if resultado:

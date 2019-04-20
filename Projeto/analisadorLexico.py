@@ -86,7 +86,9 @@ def analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos):
                     # imprimindo a linha e coluna do erro
                     print("Erro léxico: linha " + str(linha) + " e coluna " + str(col))
 
-                    return {"lexema": char, "token": "ERROOOOU BIXO", "tipo": "null"}
+                    col = col + 1
+
+                    return {"lexema": char, "token": "ERRO", "tipo": "null"}
                 arquivo.seek(arquivo.tell() - 1)  # volta o carro de leitura
 
                 if tupla["token"] == "id":
@@ -102,7 +104,10 @@ def analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos):
             tupla = {"lexema": lexema, "token": token, "tipo": "null"}
 
         else:
-            if char != " " and char != "\n" and char != "\t":
+            if estado == 0 and char != " " and char != "\n" and char != "\t":
+                lexema = tupla.get("lexema") + char
+                tupla["lexema"] = lexema
+            elif estado != 0:
                 lexema = tupla.get("lexema") + char
                 tupla["lexema"] = lexema
 
