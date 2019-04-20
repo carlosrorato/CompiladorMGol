@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 # Universidade Federal de Goias
 # Instituto de Informática - INF
 # Compiladores - Compilador para MGol
@@ -47,7 +48,7 @@ def preenche_tabela_dfa(Tabela_Transicao):
         linha.update({c:estadoId})
     for c in range(0,10):
         linha.update({str(c):estadoNum})
-    linha.update({"\n":estadoInicial , string.whitespace : estadoInicial , "\t": estadoInicial})
+    linha.update({"\n":estadoInicial, " ": estadoInicial, "\t": estadoInicial})
     linha.update({"\"": estadoLiteral})
     linha.update({"{":estadoComentario})
     linha.update({"<":estadoOPRMenor , ">":estadoOPRMaior , "=":estadoOPRIgual})

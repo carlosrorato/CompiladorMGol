@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#--
+
 # # Universidade Federal de Goiás
 # Instituto de Informática - INF
 # Compiladores - Compilador para MGol
@@ -16,12 +16,13 @@
 # e Larissa Santos de Azevedo
 
 from tabelaTransicao import *
+from tabelaSimbolos import *
 
-#Criação e preenchimento da tabela de transições do DFA
-TabelaTransicao = []
-preenche_tabela_dfa(TabelaTransicao)
+#Marcadores para a linha e coluna onde ocorre um erro:
+linha = 1
+col = 1
 
-def verifica_tabela_dfa(caractere, estado_atual):
+def verifica_tabela_dfa(caractere, estado_atual, TabelaTransicao):
     prox_estado = TabelaTransicao[estado_atual].get(caractere)
     if prox_estado != None:
         return prox_estado
@@ -52,9 +53,10 @@ def verifica_token_dfa(estado):
     return token
 
 
+def analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos):
+    global linha
+    global col
 
-
-def analisadorLexico(arquivo):
     tupla = {"lexema": "", "token": "", "tipo": "null"}
 
     char = arquivo.read(1)
@@ -65,26 +67,39 @@ def analisadorLexico(arquivo):
         return {"lexema": "EOF", "token": "EOF", "tipo": "null"}
 
     while True:
-        estado_aux = verifica_tabela_dfa(char, estado)
+
+        # fazendo o incremento da linha e zerando a coluna para caso de erro
+        if char == "\n":
+            linha += 1
+            col = 0
+
+        estado_aux = verifica_tabela_dfa(char, estado, TabelaTransicao)
         estado = estado_aux
 
-        if estado == -1: #Ou seja, não existem mais transições
-            
+        if estado == -1:  # Ou seja, não existem mais transições
+
             if not char:  # ultimo token
                 return tupla
 
             elif char != " " and char != "\n" and char != "\t":
                 if tupla['lexema'] == '':
-                    return {"lexema": char, "token": "ERROOOOU BIXO", "tipo": "null"}
-                arquivo.seek(arquivo.tell()-1) #volta o carro de leitura
-                return tupla
-            
-        
+                    # imprimindo a linha e coluna do erro
+                    print("Erro léxico: linha " + str(linha) + " e coluna " + str(col))
 
-        elif TabelaTransicao[estado].get("final"):# se é estado final
+                    return {"lexema": char, "token": "ERROOOOU BIXO", "tipo": "null"}
+                arquivo.seek(arquivo.tell() - 1)  # volta o carro de leitura
+
+                if tupla["token"] == "id":
+                    return procuraToken(tupla, TabelaSimbolos)
+                #Se não é identificador, não precisa ser salvo na Tabela de Símbolos.
+                else:
+                    print(tupla)
+                    return
+
+        elif TabelaTransicao[estado].get("final"):  # se é estado final
             lexema = tupla.get("lexema") + char
             token = verifica_token_dfa(estado)
-            tupla ={"lexema": lexema, "token": token, "tipo": "null"}
+            tupla = {"lexema": lexema, "token": token, "tipo": "null"}
 
         else:
             if char != " " and char != "\n" and char != "\t":
@@ -93,24 +108,5 @@ def analisadorLexico(arquivo):
 
         char = arquivo.read(1)
 
-
-
-## Testando
-
-
-####### PARA TESTES: Imprime toda a tabela de transições
-#i = 0
-#for k in TabelaTransicao:
-#    print("Estado:" + str(i) + " " + str(TabelaTransicao[i]) + "\n")
-#    i+=1
-
-arq = open("./teste.mgol", encoding="utf-8")
-while(1):
-    resultado = analisadorLexico(arq)
-    if resultado.get("token") == "EOF":
-        print(resultado)
-        break
-    else:
-        print(resultado)
-
-arq.close()
+        # incrementando contador de coluna
+        col += 1
