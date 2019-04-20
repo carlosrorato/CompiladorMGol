@@ -14,8 +14,8 @@ O projeto é desenvolvido utilizando a IDE Pycharm, portanto, existem arquivos p
 │   ├── analisadorLexico.py
 │   ├── main.py
 │   ├── tabelaSimbolos.py
-│	├── tabelaTransicao.py
-│	└── teste.mgol
+│   ├── tabelaTransicao.py
+│   └── teste.mgol
 ├── LICENCE
 └── README.md
 ```
