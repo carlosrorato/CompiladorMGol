@@ -11,6 +11,10 @@
 # Alunos: Carlos Henrique Rorato Souza
 # e Larissa Santos de Azevedo
 
+## Cores
+GREEN = '\033[92m'
+RESET = '\033[0m'
+
 def preenchePalavrasReservadas():
     tabelaSimbolos = {}
     listaPalavrasReservadas = ['inicio', 'varinicio', 'varfim', 'escreva',
@@ -23,6 +27,6 @@ def preenchePalavrasReservadas():
 def procuraToken(tupla, tabelaSimbolos):
     if not (tupla['lexema'] in tabelaSimbolos):
         tabelaSimbolos[tupla['lexema']] = tupla
-        print("adicionado na tabela de símbolos: " + tupla['lexema'])
+        print(GREEN + "Adicionado na tabela de símbolos: " + RESET + tupla['lexema'])
     return tabelaSimbolos[tupla['lexema']]
 

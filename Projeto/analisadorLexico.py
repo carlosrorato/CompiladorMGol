@@ -22,6 +22,10 @@ from tabelaSimbolos import *
 linha = 1
 col = 1
 
+#Cores no terminal
+RED = "\033[1;31m" 
+RESET = "\033[0;0m"
+
 def verifica_tabela_dfa(caractere, estado_atual, TabelaTransicao):
     prox_estado = TabelaTransicao[estado_atual].get(caractere)
     if prox_estado != None:
@@ -84,7 +88,7 @@ def analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos):
             elif char != " " and char != "\n" and char != "\t":
                 if tupla['lexema'] == '':
                     # imprimindo a linha e coluna do erro
-                    print("Erro léxico: linha " + str(linha) + " e coluna " + str(col))
+                    print(RED + "Erro léxico: " + RESET + "Linha " + str(linha) + ", Coluna " + str(col))
 
                     col = col + 1
 
@@ -92,11 +96,9 @@ def analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos):
                 arquivo.seek(arquivo.tell() - 1)  # volta o carro de leitura
 
                 if tupla["token"] == "id":
-                    return procuraToken(tupla, TabelaSimbolos)
+                    tupla = procuraToken(tupla, TabelaSimbolos)
                 #Se não é identificador, não precisa ser salvo na Tabela de Símbolos.
-                else:
-                    print(tupla)
-                    return
+                return tupla
 
         elif TabelaTransicao[estado].get("final"):  # se é estado final
             lexema = tupla.get("lexema") + char
