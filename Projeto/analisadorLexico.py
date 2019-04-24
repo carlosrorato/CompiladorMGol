@@ -18,14 +18,14 @@
 from tabelaTransicao import *
 from tabelaSimbolos import *
 
-#Marcadores para a linha e coluna onde ocorre um erro:
-linha = 1
-col = 1
+# Marcadores para a linha e coluna onde ocorre um erro
+dadosErro = {"linha" : 1, "colAtual": 0, "colAntiga": 0 }
 
-#Cores no terminal
+# Cores para formatar saida do print (em caso de erro)
 RED = "\033[1;31m" 
 RESET = "\033[0;0m"
 
+# Procura se há transição no DFA do estado atual lendo o caracter passado como argumento 
 def verifica_tabela_dfa(caractere, estado_atual, TabelaTransicao):
     prox_estado = TabelaTransicao[estado_atual].get(caractere)
     if prox_estado != None:
@@ -33,6 +33,7 @@ def verifica_tabela_dfa(caractere, estado_atual, TabelaTransicao):
     else:
         return -1
 
+# Retorna o nome do token dos estados finais
 def verifica_token_dfa(estado):
     if estado == 1 or estado == 3 or estado == 6:
         token = "Num"
@@ -58,62 +59,92 @@ def verifica_token_dfa(estado):
 
 
 def analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos):
-    global linha
-    global col
+    # Variavel que controla o ultimo caracter aceito para reiniciar a analise após retornas um token
+    distanciaUltimoAceito = 1
 
     tupla = {"lexema": "", "token": "", "tipo": "null"}
 
+    # Lê o caracter, incrementa o contador da coluna atual, vai para o estado 0 e reseta a palavra
     char = arquivo.read(1)
-
+    dadosErro['colAtual'] += 1
+    palavra = ""
     estado = 0
 
-    if not char:  # chegou ao final do arquivo
+    # Verifica se chegou ao final do arquivo
+    if not char:  
         return {"lexema": "EOF", "token": "EOF", "tipo": "null"}
 
     while True:
-
-        # fazendo o incremento da linha e zerando a coluna para caso de erro
+        # Fazendo o incremento da linha, zerando a coluna para caso de erro e armazenando a coluna anterior
         if char == "\n":
-            linha += 1
-            col = 0
+            dadosErro["linha"] += 1
+            dadosErro["colAntiga"] = dadosErro["colAtual"] 
+            dadosErro["colAtual"] = 0
 
+        # Recebe o estado do automato com o caracter lido 
         estado_aux = verifica_tabela_dfa(char, estado, TabelaTransicao)
         estado = estado_aux
 
-        if estado == -1:  # Ou seja, não existem mais transições
+        # Caso não exista transição / Escopo onde será retornada a tupla com o seu respectivo token e a
+        # mensagem de erro, caso precise
+        if estado == -1:  
 
-            if not char:  # ultimo token
+            # Verifica se o char é o EOF e retorna o último token
+            if not char:  
+                # Se o token estiver vazio, imprime a mensagem de erro e muda o valor da tupla
+                if tupla['token'] == '': 
+                    print(RED + "Erro léxico: " + RESET + "Linha " + str(dadosErro["linha"]) + ", Coluna " + str(dadosErro["colAtual"]))
+                    tupla = {"lexema": palavra, "token": "ERRO", "tipo": "null"}
                 return tupla
 
-            elif char != " " and char != "\n" and char != "\t":
-                if tupla['lexema'] == '':
-                    # imprimindo a linha e coluna do erro
-                    print(RED + "Erro léxico: " + RESET + "Linha " + str(linha) + ", Coluna " + str(col))
-
-                    col = col + 1
-
-                    return {"lexema": char, "token": "ERRO", "tipo": "null"}
-                arquivo.seek(arquivo.tell() - 1)  # volta o carro de leitura
-
-                if tupla["token"] == "id":
-                    tupla = procuraToken(tupla, TabelaSimbolos)
-                #Se não é identificador, não precisa ser salvo na Tabela de Símbolos.
+            # Se o token estiver vazio, imprime a mensagem de erro e retorna tupla de erro
+            if tupla['lexema'] == '':
+                # imprimindo a linha e coluna do erro
+                print(RED + "Erro léxico: " + RESET + "Linha " + str(dadosErro["linha"]) + ", Coluna " + str(dadosErro["colAtual"]))
+                tupla = {"lexema": char, "token": "ERRO", "tipo": "null"}
                 return tupla
+            
+            # Se a tupla não estiver vazia, volta o carro de leitura para o último caracter aceito para
+            # recomeçar a leitura quando o próximo token for solicitado 
+            arquivo.seek(arquivo.tell() - distanciaUltimoAceito)
 
-        elif TabelaTransicao[estado].get("final"):  # se é estado final
-            lexema = tupla.get("lexema") + char
+            # Se o caracter lido por último for \n, ao voltar o carro de leitura o \n será lido novamente.
+            # Para manter a contagem correta de linhas, diminui o valor da linha e como a coluna foi zerada
+            # na linha 82, o valor da coluna atual passa a ser o da coluna antiga menos a distância do ultimo
+            # caracter aceito, pois tais caracteres serão lidos novamente   
+            if char == '\n':
+                dadosErro["linha"] -= 1
+                dadosErro["colAtual"] = dadosErro["colAntiga"] - distanciaUltimoAceito
+            # Se não for \n, apenas diminui a distância do ultimo caracter aceito, de onde se vai recomeçar
+            # a leitura
+            else :
+                dadosErro["colAtual"] = dadosErro["colAtual"] - distanciaUltimoAceito
+
+            # Se é identificador, procura na Tabela de Símbolos pela entrada
+            if tupla["token"] == "id":
+                tupla = procuraToken(tupla, TabelaSimbolos)
+
+            # Retorna tupla com o token != de ERRO    
+            return tupla
+
+        # Se a transição existir, verifica se o novo estado é final. Se for atualiza o lexema na tupla
+        # que será retornada e reestabelece a distância do ultimo caracter aceito para 1 
+        elif TabelaTransicao[estado].get("final"):  
+            palavra = palavra + char
+            distanciaUltimoAceito = 1
             token = verifica_token_dfa(estado)
-            tupla = {"lexema": lexema, "token": token, "tipo": "null"}
+            tupla = {"lexema": palavra, "token": token, "tipo": "null"}
 
+        # Caso exista transição e o novo estado não é atual, adiciona o caracter lido na palavra.
+        # Caso o caracter seja espaço, \n ou \t, nada é feito para que sejam reconhecidos e ignorados 
         else:
-            if estado == 0 and char != " " and char != "\n" and char != "\t":
-                lexema = tupla.get("lexema") + char
-                tupla["lexema"] = lexema
-            elif estado != 0:
-                lexema = tupla.get("lexema") + char
-                tupla["lexema"] = lexema
+            if (estado == 0 and char != " " and char != "\n" and char != "\t") or estado != 0:
+                palavra = palavra + char
+                # Aumenta a distância do último caracter aceito para controlar a posição que deve se iniciar
+                # a leitura do próximo token
+                distanciaUltimoAceito += 1
 
+        # Lê um novo caracter e incrementa o contador de coluna
         char = arquivo.read(1)
+        dadosErro['colAtual'] += 1
 
-        # incrementando contador de coluna
-        col += 1

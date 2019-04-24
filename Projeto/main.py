@@ -17,8 +17,10 @@ from tabelaTransicao import *
 from tabelaSimbolos import *
 from analisadorLexico import *
 
-##Função para formatar a impressão dos tokens
+# Função para formatar a impressão dos tokens
 def imprime(resultado):
+
+    # Códigos de formatacao para saida do print
     BOLD = '\033[1m'
     RESET = '\033[0m'
     CYAN  = "\033[94m"
@@ -26,20 +28,19 @@ def imprime(resultado):
     print(BOLD + "Lexema: " + CYAN + resultado["lexema"] + RESET + ", " + BOLD + 
     "Token: " + RESET + CYAN + resultado['token'] + RESET +  ", " + BOLD + "Tipo: " + RESET + resultado['tipo'])
     print("-------------------------------------------------------------------------------------------------")
-
-
-#Criação e preenchimento da tabela de transições do DFA
+    
+# Criação e preenchimento da tabela de transições do DFA
 TabelaTransicao = []
 preenche_tabela_dfa(TabelaTransicao)
 
-#Criação e preenchimento da tabela de símbolos
+# Criação e preenchimento da tabela de símbolos
 TabelaSimbolos = preenchePalavrasReservadas()
 
+# Abre o arquivo passado como argumento
 argumentos = sys.argv
-
 arq = open(argumentos[1], encoding="utf-8")
 
-#Chama o léxico e immprime o resultado
+# Chama o léxico e immprime o resultado
 while(1):
     resultado = analisadorLexico(arq, TabelaTransicao, TabelaSimbolos)
     if resultado:

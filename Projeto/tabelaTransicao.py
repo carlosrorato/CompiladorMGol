@@ -14,7 +14,7 @@
 
 import string
 
-#Constantes para a identificação numérica dos estados
+# Constantes para a identificação numérica dos estados
 estadoInicial = 0
 estadoNum = 1
 estadoNumPonto = 2
@@ -38,10 +38,10 @@ estadoABP = 19
 estadoFCP = 20
 estadoPTV = 21
 
-#função que preenche a tabela de transição do autômato
+# Função que preenche a tabela de transição do autômato
 def preenche_tabela_dfa(Tabela_Transicao):
 
-    #estado 0 - estadoInicial:
+    # Estado 0 - estadoInicial:
     linha = {}
     linha.update({"final": False})
     for c in string.ascii_letters:
@@ -56,7 +56,7 @@ def preenche_tabela_dfa(Tabela_Transicao):
     linha.update({"(": estadoABP, ")": estadoFCP, ";": estadoPTV})
     Tabela_Transicao.append(linha)
 
-    #estado 1 - estadoNum:
+    # Estado 1 - estadoNum:
     linha = {}
     linha.update({"final": True})
     for c in range(0, 10):
@@ -64,14 +64,14 @@ def preenche_tabela_dfa(Tabela_Transicao):
     linha.update({".": estadoNumPonto, "E": estadoNumExpoente1, "e": estadoNumExpoente1})
     Tabela_Transicao.append(linha)
 
-    #estado 2 - estadoNumPonto:
+    # Estado 2 - estadoNumPonto:
     linha = {}
     linha.update({"final": False})
     for c in range(0, 10):
         linha.update({str(c): estadoNumPontoFinal})
     Tabela_Transicao.append(linha)
 
-    #estado 3 - estadoNumPontoFinal:
+    # Estado 3 - estadoNumPontoFinal:
     linha = {}
     linha.update({"final": True})
     for c in range(0, 10):
@@ -79,7 +79,7 @@ def preenche_tabela_dfa(Tabela_Transicao):
     linha.update({"E": estadoNumExpoente1, "e": estadoNumExpoente1})
     Tabela_Transicao.append(linha)
 
-    #estado 4 - estadoNumExpoente1:
+    # Estado 4 - estadoNumExpoente1:
     linha = {}
     linha.update({"final": False})
     for c in range(0, 10):
@@ -87,21 +87,21 @@ def preenche_tabela_dfa(Tabela_Transicao):
     linha.update({"+": estadoNumExpoente2, "-": estadoNumExpoente2})
     Tabela_Transicao.append(linha)
 
-    #estado 5 - estadoNumExpoente2:
+    # Estado 5 - estadoNumExpoente2:
     linha = {}
     linha.update({"final": False})
     for c in range(0, 10):
         linha.update({str(c): estadoNumExpoenteFinal})
     Tabela_Transicao.append(linha)
 
-    #estado 6 - estadoNumExpoenteFinal:
+    # Estado 6 - estadoNumExpoenteFinal:
     linha = {}
     linha.update({"final": True})
     for c in range(0, 10):
         linha.update({str(c): estadoNumExpoenteFinal})
     Tabela_Transicao.append(linha)
 
-    #estado 7 - estadoLiteral
+    # Estado 7 - estadoLiteral
     linha = {}
     linha.update({"final": False})
     for c in string.printable:
@@ -110,12 +110,12 @@ def preenche_tabela_dfa(Tabela_Transicao):
     linha.update({"\"": estadoLiteralFinal})
     Tabela_Transicao.append(linha)
 
-    #estado 8 - estadoLiteralFinal
+    # Estado 8 - estadoLiteralFinal
     linha = {}
     linha.update({"final": True})
     Tabela_Transicao.append(linha)
 
-    #estado 9 - estadoId
+    # Estado 9 - estadoId
     linha = {}
     linha.update({"final": True})
     for c in range(0, 10):
@@ -125,77 +125,76 @@ def preenche_tabela_dfa(Tabela_Transicao):
     linha.update({"_": estadoId})
     Tabela_Transicao.append(linha)
 
-    #estado 10 - estadoComentario
+    # Estado 10 - estadoComentario
     linha = {}
     linha.update({"final": False})
     for c in string.printable:
-        if c != "\"":
-            linha.update({c:estadoComentario})
+        linha.update({c:estadoComentario})
     linha.update({"\n": estadoComentario})
     linha.update({"\t": estadoComentario})
     linha.update({"}": estadoComentarioFinal})
     Tabela_Transicao.append(linha)
 
-    #estado 11 - estadoComentarioFinal
+    # Estado 11 - estadoComentarioFinal
     linha = {}
     linha.update({"final": True})
     Tabela_Transicao.append(linha)
 
-    #estado 12 - estadoOPM
+    # Estado 12 - estadoOPM
     linha = {}
     linha.update({"final": True})
     Tabela_Transicao.append(linha)
 
-    #estado 13 - estadoOPRMenor
+    # Estado 13 - estadoOPRMenor
     linha = {}
     linha.update({"final": True})
     linha.update({"-": estadoRCB})
     linha.update({">": estadoOPRMenorIgualDiferente, "=": estadoOPRMenorIgualDiferente})
     Tabela_Transicao.append(linha)
 
-    #estado 14 - estadoRCB
+    # Estado 14 - estadoRCB
     linha = {}
     linha.update({"final": True})
     Tabela_Transicao.append(linha)
 
-    #estado 15 - estadoOPRMenorIgualDiferente
+    # Estado 15 - estadoOPRMenorIgualDiferente
     linha = {}
     linha.update({"final": True})
     Tabela_Transicao.append(linha)
 
-    #estado 16 - estadoOPRMaior
+    # Estado 16 - estadoOPRMaior
     linha = {}
     linha.update({"final": True})
     linha.update({"=": estadoOPRMaiorIgual})
     Tabela_Transicao.append(linha)
 
-    #estado 17 - estadoOPRMaiorIgual
+    # Estado 17 - estadoOPRMaiorIgual
     linha = {}
     linha.update({"final": True})
     Tabela_Transicao.append(linha)
 
-    #estado 18 - estadoOPRIgual
+    # Estado 18 - estadoOPRIgual
     linha = {}
     linha.update({"final": True})
     Tabela_Transicao.append(linha)
 
-    #estado 19 - estadoABP
+    # Estado 19 - estadoABP
     linha = {}
     linha.update({"final": True})
     Tabela_Transicao.append(linha)
 
-    #estado 20 - estadoFCP
+    # Estado 20 - estadoFCP
     linha = {}
     linha.update({"final": True})
     Tabela_Transicao.append(linha)
 
-    #estado 21 - estadoPTV
+    # Estado 21 - estadoPTV
     linha = {}
     linha.update({"final": True})
     Tabela_Transicao.append(linha)
 
 
-## Aqui algumas funções para teste
+# Aqui algumas funções para teste
 
 #Teste = []
 #preenche_tabela_dfa(Teste)
