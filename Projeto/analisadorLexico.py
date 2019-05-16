@@ -62,6 +62,11 @@ def analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos):
     # Variavel que controla o ultimo caracter aceito para reiniciar a analise após retornas um token
     distanciaUltimoAceito = 1
 
+    # Variaveis para verificacao dos possiveis erros:
+    # O que não for erro de parentesis ou chave, é de caractere invalido
+    abreAspas = 0
+    abreChaves = 0
+
     tupla = {"lexema": "", "token": "", "tipo": "null"}
 
     # Lê o caracter, incrementa o contador da coluna atual, vai para o estado 0 e reseta a palavra
@@ -69,6 +74,14 @@ def analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos):
     dadosErro['colAtual'] += 1
     palavra = ""
     estado = 0
+
+    #Verificacao do tipo de erro:
+    if char == '\"':
+        abreAspas = 1
+    elif char == '{':
+        abreChaves = 1
+    elif char == '}':
+        abreChaves = 0
 
     # Verifica se chegou ao final do arquivo
     if not char:  
@@ -92,15 +105,33 @@ def analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos):
             # Verifica se o char é o EOF e retorna o último token
             if not char:  
                 # Se o token estiver vazio, imprime a mensagem de erro e muda o valor da tupla
-                if tupla['token'] == '': 
-                    print(RED + "Erro léxico: " + RESET + "Linha " + str(dadosErro["linha"]) + ", Coluna " + str(dadosErro["colAtual"]))
+                if tupla['token'] == '':
+
+                    # Verifica o tipo de erro
+                    if abreAspas % 2 != 0:
+                        tipoErro = "Não fechou as aspas"
+                    elif abreChaves == 1:
+                        tipoErro = "Não fechou as chaves"
+                    else:
+                        tipoErro = "Caractere invalido"
+
+                    print(RED + "Erro léxico: " + RESET + tipoErro + " - Linha " + str(dadosErro["linha"]) + ", Coluna " + str(dadosErro["colAtual"]))
                     tupla = {"lexema": palavra, "token": "ERRO", "tipo": "null"}
                 return tupla
 
             # Se o token estiver vazio, imprime a mensagem de erro e retorna tupla de erro
             if tupla['lexema'] == '':
+
+                # Verifica o tipo de erro
+                if abreAspas % 2 != 0:
+                    tipoErro = "Não fechou as aspas"
+                elif abreChaves == 1:
+                    tipoErro = "Não fechou as chaves"
+                else:
+                    tipoErro = "Caractere invalido"
+
                 # imprimindo a linha e coluna do erro
-                print(RED + "Erro léxico: " + RESET + "Linha " + str(dadosErro["linha"]) + ", Coluna " + str(dadosErro["colAtual"]))
+                print(RED + "Erro léxico: " + RESET + tipoErro + " - Linha " + str(dadosErro["linha"]) + ", Coluna " + str(dadosErro["colAtual"]))
                 tupla = {"lexema": char, "token": "ERRO", "tipo": "null"}
                 return tupla
             
@@ -147,4 +178,12 @@ def analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos):
         # Lê um novo caracter e incrementa o contador de coluna
         char = arquivo.read(1)
         dadosErro['colAtual'] += 1
+
+        # Verificacao do tipo de erro:
+        if char == '\"':
+            abreAspas = abreAspas + 1
+        elif char == '{':
+            abreChaves = 1
+        elif char == '}':
+            abreChaves = 0
 
