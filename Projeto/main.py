@@ -13,9 +13,9 @@
 # e Larissa Santos de Azevedo
 
 import sys
-from tabelaTransicao import *
-from tabelaSimbolos import *
-from analisadorLexico import *
+from Lexico.tabelaTransicao import *
+from Lexico.tabelaSimbolos import *
+from Lexico.analisadorLexico import *
 
 # Função para formatar a impressão dos tokens
 def imprime(resultado):

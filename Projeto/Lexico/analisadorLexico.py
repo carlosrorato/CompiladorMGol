@@ -15,8 +15,8 @@
 # Alunos: Carlos Henrique Rorato Souza
 # e Larissa Santos de Azevedo
 
-from tabelaTransicao import *
-from tabelaSimbolos import *
+from Lexico.tabelaTransicao import *
+from Lexico.tabelaSimbolos import *
 
 # Marcadores para a linha e coluna onde ocorre um erro
 dadosErro = {"linha" : 1, "colAtual": 0, "colAntiga": 0 }
