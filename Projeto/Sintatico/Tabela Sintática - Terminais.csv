@@ -1,4 +1,4 @@
-Estado,inicio,varinicio,varfim,PT_V,id,int,real,lit,leia,escreva,Literal,Num,RCB,OPM,se,AB_P,"FC_P
+Estado,inicio,varinicio,varfim,PT_V,id,inteiro,real,lit,leia,escreva,Literal,Num,RCB,OPM,se,AB_P,"FC_P
 ",então,OPR,fimse,fim,enquanto,faça,fimenquanto,$
 0,S2,,,,,,,,,,,,,,,,,,,,,,,,
 1,,,,,,,,,,,,,,,,,,,,,,,,,aceita

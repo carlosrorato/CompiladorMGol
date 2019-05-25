@@ -4,7 +4,6 @@ e Larissa Santos}
 
 inicio
     varinicio
-        A literal;
         B inteiro;
         c inteiro;
     varfim;

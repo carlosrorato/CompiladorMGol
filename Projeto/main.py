@@ -44,7 +44,7 @@ tabelaQtdSimbolos = preencheTabelaQtdSimbolos()
 
 # Abre o arquivo passado como argumento
 argumentos = sys.argv
-arq = open(argumentos[1], encoding="utf-8")
+arq = open("teste.mgol", encoding="utf-8")
 
 # Chama o léxico e immprime o resultado
 #while(1):

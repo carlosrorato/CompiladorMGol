@@ -38,8 +38,10 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
             #separacao do aux em letra e numero
             operacao = celula[0]
             t = celula.translate({ord('S'): None, ord('R'): None})
+        else:
+            t = 0
 
-        #IF ACTION(s,a) = sift t
+        #IF ACTION(s,a) = shift t
         if t and operacao == "S":
             #empilha t na pilha
             pilha.append(t)
