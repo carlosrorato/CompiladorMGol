@@ -1,5 +1,4 @@
-Estado,inicio,varinicio,varfim,PT_V,id,inteiro,real,lit,leia,escreva,Literal,Num,RCB,OPM,se,AB_P,"FC_P
-",então,OPR,fimse,fim,enquanto,faça,fimenquanto,$
+Estado,inicio,varinicio,varfim,PT_V,id,inteiro,real,lit,leia,escreva,Literal,Num,RCB,OPM,se,AB_P,FC_P,entao,OPR,fimse,fim,enquanto,faça,fimenquanto,$
 0,S2,,,,,,,,,,,,,,,,,,,,,,,,
 1,,,,,,,,,,,,,,,,,,,,,,,,,aceita
 2,,S4,,,,,,,,,,,,,,,,,,,,,,,
@@ -61,7 +60,7 @@ Estado,inicio,varinicio,varfim,PT_V,id,inteiro,real,lit,leia,escreva,Literal,Num
 58,,,,S70,,,,,,,,,,,,,,,,,,,,,
 59,,,,R19,,,,,,,,,,S71,,,,,,,,,,,
 60,,,,R20,,,,,,,,,,R20,,,,,R20,,,,,,
-61,,,,R21,,,,,,,,,,R21,,,,,R21,,,,,,
+61,,,,R21,,,,,,,,,,R21,,,R21,,R21,,,,,,
 62,,,,,R33,,,,R33,R33,,,,,R33,,,,,R33,R33,R33,,R33,
 63,,,,,R34,,,,R34,R34,,,,,R34,,,,,R34,R34,R34,,R34,
 64,,,,,R35,,,,R35,R35,,,,,R35,,,,,R35,R35,R35,,R35,
