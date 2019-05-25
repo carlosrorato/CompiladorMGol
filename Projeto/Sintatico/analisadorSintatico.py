@@ -48,7 +48,8 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
 
             #seja "a" o prox simbolo da entrada: loop para evitar comentarios
             while True:
-                a = analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos)["token"]
+                b = analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos)
+                a = b["token"]
                 if a != "Comentário":
                     break
 

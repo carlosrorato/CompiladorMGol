@@ -63,7 +63,7 @@ def analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos):
     distanciaUltimoAceito = 1
 
     # Variaveis para verificacao dos possiveis erros:
-    # O que não for erro de parentesis ou chave, é de caractere invalido
+    # O que não for erro de parenteses ou chave, é de caractere invalido
     abreAspas = 0
     abreChaves = 0
 
@@ -117,6 +117,8 @@ def analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos):
 
                     print(RED + "Erro léxico: " + RESET + tipoErro + " - Linha " + str(dadosErro["linha"]) + ", Coluna " + str(dadosErro["colAtual"]))
                     tupla = {"lexema": palavra, "token": "ERRO", "tipo": "null"}
+                elif tupla["token"] == "id":
+                    tupla = procuraToken(tupla, TabelaSimbolos)
                 return tupla
 
             # Se o token estiver vazio, imprime a mensagem de erro e retorna tupla de erro
