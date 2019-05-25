@@ -4,7 +4,7 @@ possibilidades de escrita}
 inicio
     varinicio
         B inteiro;
-        C literal;
+        C lit;
         A real;
         D inteiro;
     varfim;
