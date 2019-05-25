@@ -85,7 +85,7 @@ def analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos):
 
     # Verifica se chegou ao final do arquivo
     if not char:  
-        return {"lexema": "EOF", "token": "EOF", "tipo": "null"}
+        return {"lexema": "EOF", "token": "$", "tipo": "null"}
 
     while True:
         # Fazendo o incremento da linha, zerando a coluna para caso de erro e armazenando a coluna anterior

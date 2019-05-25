@@ -19,8 +19,8 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
 
     #Implementacao do algoritmo - conforme descrito no livro
 
-    #Seja "a" o primeiro símbolo da gramática
-    a = analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos)
+    #Seja "a" o primeiro símbolo da entrada
+    a = analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos)["token"]
 
     #Repetir indefinidamente
     while(1):
@@ -30,19 +30,19 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
         #Verificando os dados nas tabelas
 
         if tabelaAcoes[s][a]:
-            aux = tabelaAcoes[s][a]
+            celula = tabelaAcoes[s][a]
 
             #separacao do aux em letra e numero
-            operacao = aux[0]
-            t = aux.translate({ord('S'): None, ord('R'): None})
+            operacao = celula[0]
+            t = celula.translate({ord('S'): None, ord('R'): None})
 
         #IF ACTION(s,a) = sift t
         if t and operacao == "S":
             #empilha t na pilha
             pilha.append(t)
 
-            #seja "a" o prox simbolo da pilha
-            a = analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos)
+            #seja "a" o prox simbolo da entrada
+            a = analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos)["token"]
 
         #ELSE IF ACTION(s,a) = reduce A->B
         elif t and operacao == "R":
@@ -70,8 +70,14 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
 
             print("Regra aplicada: " + A + " -> " + B)
 
-            
 
+        elif celula == "aceita":
+            print("Analise sintatica finalizada: aceitou!")
+            return
+
+        else:
+            print("Ocorreu um erro. Aqui, localizar e tratar o erro")
+            return
 
 
 

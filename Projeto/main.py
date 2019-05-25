@@ -45,7 +45,7 @@ while(1):
     resultado = analisadorLexico(arq, TabelaTransicao, TabelaSimbolos)
     if resultado:
         imprime(resultado)
-        if resultado.get("token") == "EOF":
+        if resultado.get("token") == "$":
             break
 
 arq.close()
