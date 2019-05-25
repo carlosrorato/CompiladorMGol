@@ -1,0 +1,53 @@
+{Programa para testar outras
+possibilidades de escrita}
+
+inicio
+    varinicio
+        B inteiro;
+        C literal;
+        A real;
+        D inteiro;
+    varfim;
+
+   escreva "Digite um numero:";
+   leia B;
+
+   {Este eh um comentario no meio do programa}
+
+   C <- "Isso eh um teste de programa em MGol";
+
+   B <- 2;
+   B <- 3;
+   A <- B+1;
+   A <- c+1;
+    
+   se (B<1)
+   entao
+     se (c <2)
+     entao
+       escreva "texto";
+     fimse
+   fimse
+
+   {o contador B recebe valor dez e vai decaindo
+   com as iteracoes}
+
+   B <- 10;
+
+   enquanto (B >= 0) faça
+     escreva "iteracao...iterando...";
+     B <- B -  1;
+     se (B > 5)
+       escreva "Numero maior que cinco";
+       D <- 2;
+       enquanto (D >= 0) faça
+        escreva "imprimindo teste...";
+       fimenquanto
+     fimse
+   fimenquanto
+
+   escreva "programa finalizado";
+
+   {Comentario antes do fim do programa}
+
+fim
