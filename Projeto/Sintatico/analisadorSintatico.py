@@ -61,7 +61,8 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
             B = tabelaQtdSimbolos[int(t) - 1].get("Beta")
 
             if x:
-                pilha.pop(int(x))
+                for i in range(0, int(x)):
+                    pilha.pop()
 
             #faça t ser o topo da pilha
 
