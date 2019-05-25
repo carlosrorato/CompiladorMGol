@@ -5,11 +5,7 @@ e Larissa Santos}
 inicio
     varinicio
         B inteiro;
-        c inteiro;
     varfim;
-
-   escreva "Digite um nome:";
-   leia A;
 
    escreva "Digite um numero:";
    leia B;
