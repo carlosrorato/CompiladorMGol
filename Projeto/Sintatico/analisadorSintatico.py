@@ -74,7 +74,7 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
                 # Na tabela dos desvios a celula contem apenas o numero do estado
                 valor = tabelaDesvios[int(t)].get(A)
 
-            pilha.append(valor)
+                pilha.append(valor)
             #imprima a producao A->B
 
             print("Regra aplicada: " + A + " -> " + B)
