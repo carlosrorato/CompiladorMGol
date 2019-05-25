@@ -20,7 +20,10 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
     #Implementacao do algoritmo - conforme descrito no livro
 
     #Seja "a" o primeiro símbolo da entrada
-    a = analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos)["token"]
+    while True:
+        a = analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos)["token"]
+        if a != "Comentário":
+            break
 
     #Repetir indefinidamente
     while(1):
@@ -29,8 +32,8 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
 
         #Verificando os dados nas tabelas
 
-        if tabelaAcoes[s][a]:
-            celula = tabelaAcoes[s][a]
+        if tabelaAcoes[int(s)].get(a):
+            celula = tabelaAcoes[int(s)].get(a)
 
             #separacao do aux em letra e numero
             operacao = celula[0]
@@ -41,19 +44,22 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
             #empilha t na pilha
             pilha.append(t)
 
-            #seja "a" o prox simbolo da entrada
-            a = analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos)["token"]
+            #seja "a" o prox simbolo da entrada: loop para evitar comentarios
+            while True:
+                a = analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos)["token"]
+                if a != "Comentário":
+                    break
 
         #ELSE IF ACTION(s,a) = reduce A->B
         elif t and operacao == "R":
             #Aqui, o t vai ser o numero da regra
             #desempilha |B| símbolos da pilha
-            x = tabelaQtdSimbolos[t - 1]["TamanhoBeta"]
-            A = tabelaQtdSimbolos[t - 1]["A"]
-            B = tabelaQtdSimbolos[t - 1]["Beta"]
+            x = tabelaQtdSimbolos[int(t) - 1].get("TamanhoBeta")
+            A = tabelaQtdSimbolos[int(t) - 1].get("A")
+            B = tabelaQtdSimbolos[int(t) - 1].get("Beta")
 
             if x:
-                pilha.pop(x)
+                pilha.pop(int(x))
 
             #faça t ser o topo da pilha
 
@@ -61,9 +67,9 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
 
             #empilha GOTO[t,A]
 
-            if tabelaDesvios[t][A]:
+            if tabelaDesvios[int(t)].get(A):
                 # Na tabela dos desvios a celula contem apenas o numero do estado
-                valor = tabelaDesvios[t][A]
+                valor = tabelaDesvios[int(t)].get(A)
 
             pilha.append(valor)
             #imprima a producao A->B

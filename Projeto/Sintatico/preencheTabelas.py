@@ -1,9 +1,9 @@
 import csv
 
 #Nome dos arquivos
-csvTerminais = "Tabela Sintática - Terminais.csv"
-csvNaoTerminais = "Tabela Sintática - Não-Terminais.csv"
-csvQtdSimbolos = "Tabela Sintática - qtd_SimbolosB.csv"
+csvTerminais = "Sintatico/Tabela Sintática - Terminais.csv"
+csvNaoTerminais = "Sintatico/Tabela Sintática - Não-Terminais.csv"
+csvQtdSimbolos = "Sintatico/Tabela Sintática - qtd_SimbolosB.csv"
 
 #Abre arquivo csvFile, o csv recebido como parametro, e preenche a lista de dicionários
 def preencheTabela(csvFile):

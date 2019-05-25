@@ -16,6 +16,8 @@ import sys
 from Lexico.tabelaTransicao import *
 from Lexico.tabelaSimbolos import *
 from Lexico.analisadorLexico import *
+from Sintatico.analisadorSintatico import *
+from Sintatico.preencheTabelas import *
 
 # Função para formatar a impressão dos tokens
 def imprime(resultado):
@@ -30,22 +32,29 @@ def imprime(resultado):
     print("-------------------------------------------------------------------------------------------------")
     
 # Criação e preenchimento da tabela de transições do DFA
-TabelaTransicao = []
-preenche_tabela_dfa(TabelaTransicao)
+#TabelaTransicao = []
+#preenche_tabela_dfa(TabelaTransicao)
 
 # Criação e preenchimento da tabela de símbolos
-TabelaSimbolos = preenchePalavrasReservadas()
+#TabelaSimbolos = preenchePalavrasReservadas()
+
+tabelaAcoes = preencheTabelaAcoes()
+tabelaDesvios = preencheTabelaDesvios()
+tabelaQtdSimbolos = preencheTabelaQtdSimbolos()
 
 # Abre o arquivo passado como argumento
 argumentos = sys.argv
 arq = open(argumentos[1], encoding="utf-8")
 
 # Chama o léxico e immprime o resultado
-while(1):
-    resultado = analisadorLexico(arq, TabelaTransicao, TabelaSimbolos)
-    if resultado:
-        imprime(resultado)
-        if resultado.get("token") == "$":
-            break
+#while(1):
+#    resultado = analisadorLexico(arq, TabelaTransicao, TabelaSimbolos)
+#    if resultado:
+#        imprime(resultado)
+#       if resultado.get("token") == "$":
+#            break
+
+#chama o léxico
+analisadorSintatico(tabelaAcoes,tabelaDesvios,tabelaQtdSimbolos, arq)
 
 arq.close()
