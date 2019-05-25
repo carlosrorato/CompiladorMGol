@@ -29,12 +29,7 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
 
         #Verificando os dados nas tabelas
 
-        if tabelaDesvios[s][a]:
-            #Na tabela dos desvios a celula contem apenas o numero do estado
-            t = tabelaDesvios[s][a]
-            operacao = "S"
-
-        elif tabelaAcoes[s][a]:
+        if tabelaAcoes[s][a]:
             aux = tabelaAcoes[s][a]
 
             #separacao do aux em letra e numero
@@ -51,8 +46,31 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
 
         #ELSE IF ACTION(s,a) = reduce A->B
         elif t and operacao == "R":
-            return
+            #Aqui, o t vai ser o numero da regra
+            #desempilha |B| símbolos da pilha
+            x = tabelaQtdSimbolos[t - 1]["TamanhoBeta"]
+            A = tabelaQtdSimbolos[t - 1]["A"]
+            B = tabelaQtdSimbolos[t - 1]["Beta"]
 
+            if x:
+                pilha.pop(x)
+
+            #faça t ser o topo da pilha
+
+            t = pilha[len(pilha) - 1]
+
+            #empilha GOTO[t,A]
+
+            if tabelaDesvios[t][A]:
+                # Na tabela dos desvios a celula contem apenas o numero do estado
+                valor = tabelaDesvios[t][A]
+
+            pilha.append(valor)
+            #imprima a producao A->B
+
+            print("Regra aplicada: " + A + " -> " + B)
+
+            
 
 
 
