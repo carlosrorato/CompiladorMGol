@@ -22,7 +22,10 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
     #Seja "a" o primeiro símbolo da entrada
     while True:
         a = analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos)["token"]
-        if a != "Comentário":
+
+        # Aqui, ele deve prosseguir a analise, independente dos erros (que mesmo assim sao mostrados na tela)
+        # e dos comentarios
+        if a != "Comentário" and a != "Erro":
             break
 
     #Repetir indefinidamente
@@ -50,7 +53,10 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
             while True:
                 b = analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos)
                 a = b["token"]
-                if a != "Comentário":
+
+                #Aqui, ele deve prosseguir a analise, independente dos erros (que mesmo assim sao mostrados na tela)
+                # e dos comentarios
+                if a != "Comentário" and a != "Erro":
                     break
 
         #ELSE IF ACTION(s,a) = reduce A->B
