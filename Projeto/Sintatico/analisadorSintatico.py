@@ -1,3 +1,18 @@
+# -*- coding: utf-8 -*-
+
+# # Universidade Federal de Goiás
+# Instituto de Informática - INF
+# Compiladores - Compilador para MGol
+#
+# Módulo: Analisador Sintatico
+# Recebe os tokens vindos do Analisador Léxico
+# e faz uma análise em relação as produções
+# da gramática
+#
+# Alunos: Carlos Henrique Rorato Souza
+# e Larissa Santos de Azevedo
+
+
 from Lexico.analisadorLexico import *
 from Lexico.tabelaSimbolos import *
 from Lexico.tabelaTransicao import *
