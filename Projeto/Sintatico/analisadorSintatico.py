@@ -93,6 +93,8 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
 
         else:
             print("Ocorreu um erro. Aqui, localizar e tratar o erro")
+            #Depois detalhar mais aqui
+            print("Código do erro: " + celula)
             return
 
 
