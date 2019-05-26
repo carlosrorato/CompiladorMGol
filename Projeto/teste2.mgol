@@ -3,11 +3,38 @@ possibilidades de escrita}
 
 inicio
     varinicio
-        
+        B inteiro;
+        C lit;
+        A real;
+        D inteiro;
     varfim;
 
 
+   leia B;
+
+   {Este eh um comentario no meio do programa}
+
+
+   B <- 2;
+   B <- 3;
+   A <- B+1;
+   A <- c+1;
+    
+   se (B<1)
+   entao
+     se (c <2)
+     entao
+       escreva "texto";
+     fimse
+   fimse
+
+   {o contador B recebe valor dez e vai decaindo
+   com as iteracoes}
+
+   B <- 10;
+
    enquanto (B >= 0) faca
+  
      B <- B -  1;
      se (B > 5)
       entao
@@ -16,6 +43,8 @@ inicio
        fimenquanto
      fimse
    fimenquanto
+
+
    {Comentario antes do fim do programa}
 
 fim
