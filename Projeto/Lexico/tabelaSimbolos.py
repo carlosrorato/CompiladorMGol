@@ -19,7 +19,7 @@ RESET = '\033[0m'
 def preenchePalavrasReservadas():
     tabelaSimbolos = {}
     listaPalavrasReservadas = ['inicio', 'varinicio', 'varfim', 'escreva',
-    'leia', 'se', 'entao', 'fimse', 'fim', 'inicio', 'lit', 'real', 'inteiro', 'faça', 'enquanto',
+    'leia', 'se', 'entao', 'fimse', 'fim', 'inicio', 'lit', 'real', 'inteiro', 'faca', 'enquanto',
     'fimenquanto']
     
     for palavra in listaPalavrasReservadas:
