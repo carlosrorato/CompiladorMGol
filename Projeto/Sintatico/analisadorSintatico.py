@@ -145,6 +145,7 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaPan
 
             #Verificando a quantidade de simbolos no dicionario
             if len(simbolosFaltando) == 1:
+                print(BOLD + "\tTratamento de erro." + RESET + " Inserindo símbolo ausente...")
 
                 chave = [key for key in simbolosFaltando.keys()]
 
@@ -155,22 +156,39 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaPan
 
                 flagSimbolo = True #Flag para indicar o erro onde falta um símbolo
 
+                print("\t" + CYANDARK + BOLD + a + RESET + " inserido para prosseguir a análise.")
+
             else:
+                print(BOLD + "\t\tIniciando tratamento de erro." + RESET + " À procura de um token sincronizante...")
                 listaFollow = tabelaPanico[int(s)].get('Follow')
                 teste = 1
                 while (teste):
                     while True:
                         a = analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos)["token"]
                         # Aqui, ele deve prosseguir a analise, independente dos erros (que mesmo assim sao mostrados na tela)
-                        # e dos comentarios
-                        if a != "Comentário" and a != "Erro":
+                        # e dos comentarios, alem de tratar o fim de arquivo
+                        if a == "$":
+                            print("\t\tArquivo finalizado. Não foi possível concluir a recuperação...")
+                            print(BOLD + "\t\tFim de tratamento de erro")
+                            print(BOLD + "\n----------------------------------------------------------------")
+                            print("Análise Sintática finalizada: " + RESET + "foram encontrados erros. " + RED + "Falha!")
+                            print(RESET + BOLD + "----------------------------------------------------------------")
+                            return
+                        elif a != "Comentário" and a != "Erro":
                             break
                     for token in listaFollow:
                         if token == a:
                             teste = 0
                             break
+                print("\t\tEncontrado token sincronizante: " + CYANDARK + BOLD + a + RESET)
+
                 x = tabelaPanico[int(s)].get('QtdSimbolos')
                 if x:
                     for i in range(0, int(x)):
                         pilha.pop()
-    
+                print(BOLD + "\t\tRetomando análise sintática" + RESET)
+                
+## Faltando
+# arrumar linha e coluna do erro sintático para exibir na tela
+# arrumar erro léxico quando finaliza arquivo com \n e e está no meio do modo pânico
+# 
