@@ -4,7 +4,7 @@ e Larissa Santos}
 
 inicio
     varinicio
-        B inteiro
+        B inteiro;
     varfim;
 
    escreva "Digite um numero:";

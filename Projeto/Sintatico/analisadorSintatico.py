@@ -17,6 +17,14 @@ from Lexico.analisadorLexico import *
 from Lexico.tabelaSimbolos import *
 from Lexico.tabelaTransicao import *
 
+# Cores para formatar saída 
+BOLD = '\033[1m'
+CYANDARK  = "\033[94m"
+CYAN = "\033[96m"
+GREEN = '\033[92m'
+RED = "\033[1;31m"
+RESET = '\033[0m'
+
 def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
 
     # Criação e preenchimento da tabela de transições do DFA
@@ -107,16 +115,17 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
                 pilha.append(valor)
             #imprima a producao A->B
 
-            print("Regra aplicada: " + A + " -> " + B)
+            print("Regra aplicada: " + A +" -> " + B + RESET)
 
 
         elif celula == "aceita":
-
+            print()
+            print(BOLD + "----------------------------------------------------------------")
             if flagErro:
-                print("Analise sintatica finalizada: foram encontrados erros. Falhou!")
+                print("Análise Sintática finalizada: " + RESET + "foram encontrados erros. " + RED + "Falha!")
             else:
-                print("Analise sintatica finalizada: aceitou!")
-                
+                print("Análise Sintática finalizada: " + GREEN + "aceitou!")
+            print(RESET + BOLD + "----------------------------------------------------------------")    
             return
 
         else:
@@ -129,9 +138,9 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
             for k,v in tabelaAcoes[int(s)].items():
                 if v != '' and k!='Estado':
                     simbolosFaltando.update({k : v})
-                    listaParaImprimir = listaParaImprimir + " " + str(k)
+                    listaParaImprimir = listaParaImprimir + " " + str(k) 
 
-            print("Erro Sintático. Faltando algum do(s) símbolo(s): " + listaParaImprimir)
+            print(RED + BOLD + "Erro Sintático. " + RESET + "Faltando algum do(s) símbolo(s): " + BOLD + CYANDARK + listaParaImprimir + RESET)
 
             #Verificando a quantidade de simbolos no dicionario
             if len(simbolosFaltando) == 1:
