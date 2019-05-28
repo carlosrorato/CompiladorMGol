@@ -31,6 +31,7 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
     #empilha estado inicial
     pilha.append(0)
 
+
     #Implementacao do algoritmo - conforme descrito no livro
 
     #Seja "a" o primeiro símbolo da entrada
@@ -41,6 +42,10 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
         # e dos comentarios
         if a != "Comentário" and a != "Erro":
             break
+
+    flagSimbolo = False  # Flag para indicar o erro onde falta um símbolo
+    a_antigo = a
+    flagErro = False # Flag para indicar a ocorrencia de erros
 
     #Repetir indefinidamente
     while(1):
@@ -58,17 +63,21 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
         else:
             t = 0
 
-        #IF ACTION(s,a) = shift t
+        # IF ACTION(s,a) = shift t
         if t and operacao == "S":
-            #empilha t na pilha
+            # empilha t na pilha
             pilha.append(t)
 
-            #seja "a" o prox simbolo da entrada: loop para evitar comentarios
+            # seja "a" o prox simbolo da entrada: loop para evitar comentarios
             while True:
-                b = analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos)
-                a = b["token"]
+                if flagSimbolo: # Caso tenha no passo anterior dado um erro de um unico simbolo
+                    a = a_antigo
+                    flagSimbolo = False
+                else:
+                    b = analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos)
+                    a = b["token"]
 
-                #Aqui, ele deve prosseguir a analise, independente dos erros (que mesmo assim sao mostrados na tela)
+                # Aqui, ele deve prosseguir a analise, independente dos erros (que mesmo assim sao mostrados na tela)
                 # e dos comentarios
                 if a != "Comentário" and a != "Erro":
                     break
@@ -102,10 +111,17 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
 
 
         elif celula == "aceita":
-            print("Analise sintatica finalizada: aceitou!")
+
+            if flagErro:
+                print("Analise sintatica finalizada: foram encontrados erros. Falhou!")
+            else:
+                print("Analise sintatica finalizada: aceitou!")
+                
             return
 
         else:
+            flagErro = True
+
             simbolosFaltando = {}
 
             listaParaImprimir = ""
@@ -121,7 +137,13 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
             if len(simbolosFaltando) == 1:
 
                 chave = [key for key in simbolosFaltando.keys()]
+
+                # para armazenar o último token lido
+                a_antigo = a
+
                 a = chave[0]
+
+                flagSimbolo = True #Flag para indicar o erro onde falta um símbolo
 
             else:
 
