@@ -25,7 +25,7 @@ GREEN = '\033[92m'
 RED = "\033[1;31m"
 RESET = '\033[0m'
 
-def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
+def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaPanico, arquivo):
 
     # Criação e preenchimento da tabela de transições do DFA
     TabelaTransicao = []
@@ -33,6 +33,7 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
 
     # Criação e preenchimento da tabela de símbolos
     TabelaSimbolos = preenchePalavrasReservadas()
+
     
     #lista para simular pilha
     pilha = []
@@ -155,6 +156,21 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
                 flagSimbolo = True #Flag para indicar o erro onde falta um símbolo
 
             else:
-
-                print("Iniciando o modo pânico...entrando em pânico....")
-                return
+                listaFollow = tabelaPanico[int(s)].get('Follow')
+                teste = 1
+                while (teste):
+                    while True:
+                        a = analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos)["token"]
+                        # Aqui, ele deve prosseguir a analise, independente dos erros (que mesmo assim sao mostrados na tela)
+                        # e dos comentarios
+                        if a != "Comentário" and a != "Erro":
+                            break
+                    for token in listaFollow:
+                        if token == a:
+                            teste = 0
+                            break
+                x = tabelaPanico[int(s)].get('QtdSimbolos')
+                if x:
+                    for i in range(0, int(x)):
+                        pilha.pop()
+    

@@ -41,6 +41,7 @@ def imprime(resultado):
 tabelaAcoes = preencheTabelaAcoes()
 tabelaDesvios = preencheTabelaDesvios()
 tabelaQtdSimbolos = preencheTabelaQtdSimbolos()
+tabelaPanico = preencheTabelaPanico()
 
 # Abre o arquivo passado como argumento
 argumentos = sys.argv
@@ -55,6 +56,7 @@ arq = open("teste.mgol", encoding="utf-8")
 #            break
 
 #chama o léxico
-analisadorSintatico(tabelaAcoes,tabelaDesvios,tabelaQtdSimbolos, arq)
+
+analisadorSintatico(tabelaAcoes,tabelaDesvios,tabelaQtdSimbolos, tabelaPanico, arq)
 
 arq.close()
