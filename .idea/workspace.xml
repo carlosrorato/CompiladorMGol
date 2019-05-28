@@ -25,19 +25,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="analisadorSintatico.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="analisadorSintatico.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Projeto/Sintatico/analisadorSintatico.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
-              <caret line="121" column="38" selection-start-line="121" selection-start-column="38" selection-end-line="121" selection-end-column="38" />
+            <state relative-caret-position="3050">
+              <caret line="125" column="64" selection-start-line="125" selection-start-column="64" selection-end-line="125" selection-end-column="64" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="analisadorLexico.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="analisadorLexico.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Projeto/Lexico/analisadorLexico.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
+            <state relative-caret-position="1725">
               <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
             </state>
           </provider>
@@ -416,17 +416,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Projeto/Lexico/analisadorLexico.py">
+    <entry file="file://$PROJECT_DIR$/Projeto/Sintatico/analisadorSintatico.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
+        <state relative-caret-position="3050">
+          <caret line="125" column="64" selection-start-line="125" selection-start-column="64" selection-end-line="125" selection-end-column="64" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Projeto/Sintatico/analisadorSintatico.py">
+    <entry file="file://$PROJECT_DIR$/Projeto/Lexico/analisadorLexico.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="121" column="38" selection-start-line="121" selection-start-column="38" selection-end-line="121" selection-end-column="38" />
+        <state relative-caret-position="1725">
+          <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
         </state>
       </provider>
     </entry>

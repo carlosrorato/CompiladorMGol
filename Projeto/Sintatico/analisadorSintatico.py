@@ -45,7 +45,6 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
 
     #Repetir indefinidamente
     while(1):
-        print(a)
         #Seja "s" o estado do topo da pilha
         s = pilha[len(pilha) - 1]
 
@@ -125,7 +124,6 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
             if len(simbolosFaltando) == 1:
 
                 chave = [key for key in simbolosFaltando.keys()]
-                print(chave[0])
                 a = chave[0]
 
             else:
