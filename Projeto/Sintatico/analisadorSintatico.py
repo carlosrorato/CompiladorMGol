@@ -45,6 +45,7 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
 
     #Repetir indefinidamente
     while(1):
+        print(a)
         #Seja "s" o estado do topo da pilha
         s = pilha[len(pilha) - 1]
 
@@ -118,14 +119,16 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
                     simbolosFaltando.update({k : v})
                     listaParaImprimir = listaParaImprimir + " " + str(k)
 
+            print("Faltando algum dos símbolo(s): " + listaParaImprimir)
+
             #Verificando a quantidade de simbolos no dicionario
             if len(simbolosFaltando) == 1:
-                key = simbolosFaltando.items()
-                print("Faltando símbolo: " + listaParaImprimir)
-                print(key)
-                #a = key
-                return 
+
+                chave = [key for key in simbolosFaltando.keys()]
+                print(chave[0])
+                a = chave[0]
+
             else:
-                print("Faltando símbolos:" + listaParaImprimir)
+
                 print("Iniciando o modo pânico...entrando em pânico....")
                 return
