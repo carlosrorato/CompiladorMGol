@@ -115,7 +115,7 @@ def analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos):
                     else:
                         tipoErro = "Caractere invalido"
 
-                    print(RED + "Erro léxico: " + RESET + tipoErro + " - Linha " + str(dadosErro["linha"]) + ", Coluna " + str(dadosErro["colAtual"]))
+                    print(RED + "Erro léxico. " + RESET + tipoErro + ": "+ palavra + " - Linha " + str(dadosErro["linha"]) + ", Coluna " + str(dadosErro["colAtual"]))
                     tupla = {"lexema": palavra, "token": "ERRO", "tipo": "null"}
                 elif tupla["token"] == "id":
                     tupla = procuraToken(tupla, TabelaSimbolos)
@@ -133,7 +133,8 @@ def analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos):
                     tipoErro = "Caractere invalido"
 
                 # imprimindo a linha e coluna do erro
-                print(RED + "Erro léxico: " + RESET + tipoErro + " - Linha " + str(dadosErro["linha"]) + ", Coluna " + str(dadosErro["colAtual"]))
+                    print(RED + "Erro léxico. " + RESET + tipoErro + ": " + char + " - Linha " + str(
+                        dadosErro["linha"]) + ", Coluna " + str(dadosErro["colAtual"]))
                 tupla = {"lexema": char, "token": "ERRO", "tipo": "null"}
                 return tupla
             

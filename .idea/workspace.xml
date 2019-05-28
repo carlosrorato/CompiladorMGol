@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="44ea3100-a3b0-40f9-a462-e6a8c1b77a48" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projeto/Lexico/analisadorLexico.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/Lexico/analisadorLexico.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projeto/Sintatico/analisadorSintatico.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/Sintatico/analisadorSintatico.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,8 +18,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Projeto/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
+            <state relative-caret-position="383">
+              <caret line="57" column="25" lean-forward="true" selection-start-line="57" selection-start-column="25" selection-end-line="57" selection-end-column="25" />
               <folding>
                 <element signature="e#305#315#0" expanded="true" />
               </folding>
@@ -25,20 +27,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="analisadorSintatico.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="analisadorSintatico.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Projeto/Sintatico/analisadorSintatico.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3050">
-              <caret line="125" column="64" selection-start-line="125" selection-start-column="64" selection-end-line="125" selection-end-column="64" />
+            <state relative-caret-position="383">
+              <caret line="125" column="17" lean-forward="true" selection-start-line="125" selection-start-column="17" selection-end-line="125" selection-end-column="17" />
+              <folding>
+                <element signature="e#342#379#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="analisadorLexico.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="analisadorLexico.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Projeto/Lexico/analisadorLexico.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1725">
-              <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
+            <state relative-caret-position="250">
+              <caret line="138" column="28" lean-forward="true" selection-start-line="138" selection-start-column="28" selection-end-line="138" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -46,8 +51,8 @@
       <file leaf-file-name="teste.mgol" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Projeto/teste.mgol">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="675">
-              <caret line="27" column="3" selection-start-line="27" selection-start-column="3" selection-end-line="27" selection-end-column="3" />
+            <state relative-caret-position="150">
+              <caret line="6" column="18" lean-forward="true" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -71,8 +76,9 @@
         <option value="$PROJECT_DIR$/Projeto/main.py" />
         <option value="$PROJECT_DIR$/Projeto/tabelaTransicao.py" />
         <option value="$PROJECT_DIR$/Projeto/analisadorLexico.py" />
-        <option value="$PROJECT_DIR$/Projeto/teste.mgol" />
         <option value="$PROJECT_DIR$/Projeto/Sintatico/preencheTabelas.py" />
+        <option value="$PROJECT_DIR$/Projeto/Lexico/analisadorLexico.py" />
+        <option value="$PROJECT_DIR$/Projeto/teste.mgol" />
         <option value="$PROJECT_DIR$/Projeto/Sintatico/analisadorSintatico.py" />
       </list>
     </option>
@@ -247,7 +253,7 @@
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="3" />
       <window_info anchor="bottom" id="Python Console" order="0" />
-      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.36221296" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.34133613" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="1" weight="0.08053007" />
       <window_info id="Favorites" order="0" side_tool="true" />
@@ -266,7 +272,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <option name="time" value="5" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -291,6 +297,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="12" column="29" lean-forward="true" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+          <folding>
+            <element signature="e#342#379#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -399,34 +408,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Projeto/teste.mgol">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="6" column="18" lean-forward="true" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Projeto/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
+        <state relative-caret-position="383">
+          <caret line="57" column="25" lean-forward="true" selection-start-line="57" selection-start-column="25" selection-end-line="57" selection-end-column="25" />
           <folding>
             <element signature="e#305#315#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Projeto/teste.mgol">
+    <entry file="file://$PROJECT_DIR$/Projeto/Lexico/analisadorLexico.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="27" column="3" selection-start-line="27" selection-start-column="3" selection-end-line="27" selection-end-column="3" />
+        <state relative-caret-position="250">
+          <caret line="138" column="28" lean-forward="true" selection-start-line="138" selection-start-column="28" selection-end-line="138" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Projeto/Sintatico/analisadorSintatico.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3050">
-          <caret line="125" column="64" selection-start-line="125" selection-start-column="64" selection-end-line="125" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Projeto/Lexico/analisadorLexico.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1725">
-          <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
+        <state relative-caret-position="383">
+          <caret line="125" column="17" lean-forward="true" selection-start-line="125" selection-start-column="17" selection-end-line="125" selection-end-column="17" />
+          <folding>
+            <element signature="e#342#379#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

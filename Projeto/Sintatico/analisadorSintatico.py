@@ -16,7 +16,6 @@
 from Lexico.analisadorLexico import *
 from Lexico.tabelaSimbolos import *
 from Lexico.tabelaTransicao import *
-import string
 
 def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
 
@@ -107,8 +106,6 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
             return
 
         else:
-            print("Erro sintático:")
-
             simbolosFaltando = {}
 
             listaParaImprimir = ""
@@ -118,7 +115,7 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
                     simbolosFaltando.update({k : v})
                     listaParaImprimir = listaParaImprimir + " " + str(k)
 
-            print("Faltando algum dos símbolo(s): " + listaParaImprimir)
+            print("Erro Sintático. Faltando algum dos símbolo(s): " + listaParaImprimir)
 
             #Verificando a quantidade de simbolos no dicionario
             if len(simbolosFaltando) == 1:
