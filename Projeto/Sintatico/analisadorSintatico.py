@@ -115,7 +115,7 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
                     simbolosFaltando.update({k : v})
                     listaParaImprimir = listaParaImprimir + " " + str(k)
 
-            print("Erro Sintático. Faltando algum dos símbolo(s): " + listaParaImprimir)
+            print("Erro Sintático. Faltando algum do(s) símbolo(s): " + listaParaImprimir)
 
             #Verificando a quantidade de simbolos no dicionario
             if len(simbolosFaltando) == 1:

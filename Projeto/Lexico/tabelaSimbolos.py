@@ -32,7 +32,7 @@ def preenchePalavrasReservadas():
 def procuraToken(tupla, tabelaSimbolos):
     if not (tupla['lexema'] in tabelaSimbolos):
         tabelaSimbolos[tupla['lexema']] = tupla
-        print(GREEN + "Adicionado na tabela de símbolos: " + RESET + tupla['lexema'])
+        #print(GREEN + "Adicionado na tabela de símbolos: " + RESET + tupla['lexema'])
         
     return tabelaSimbolos[tupla['lexema']]
 
