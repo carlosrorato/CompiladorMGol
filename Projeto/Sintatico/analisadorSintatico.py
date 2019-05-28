@@ -109,16 +109,23 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, arquivo):
         else:
             print("Erro sintático:")
 
-            #capturando a linha da tabela
-            linha = tabelaAcoes[int(s)]
+            simbolosFaltando = {}
+
+            listaParaImprimir = ""
+
+            for k,v in tabelaAcoes[int(s)].items():
+                if v != '' and k!='Estado':
+                    simbolosFaltando.update({k : v})
+                    listaParaImprimir = listaParaImprimir + " " + str(k)
 
             #Verificando a quantidade de simbolos no dicionario
-            if len(tabelaAcoes[int(s)]) == 1:
-                linha.popitem()
-                key,val = linha
-                print("Faltando símbolo: " + key)
-                a = key
+            if len(simbolosFaltando) == 1:
+                key = simbolosFaltando.items()
+                print("Faltando símbolo: " + listaParaImprimir)
+                print(key)
+                #a = key
+                return 
             else:
-                print("Faltando símbolos:" + linha.keys())
+                print("Faltando símbolos:" + listaParaImprimir)
                 print("Iniciando o modo pânico...entrando em pânico....")
                 return

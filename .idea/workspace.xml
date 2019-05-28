@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="44ea3100-a3b0-40f9-a462-e6a8c1b77a48" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Projeto/Sintatico/analisadorSintatico.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/Sintatico/analisadorSintatico.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,8 +17,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Projeto/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="3" selection-end-line="13" />
+            <state relative-caret-position="350">
+              <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
               <folding>
                 <element signature="e#305#315#0" expanded="true" />
               </folding>
@@ -28,8 +29,17 @@
       <file leaf-file-name="analisadorSintatico.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Projeto/Sintatico/analisadorSintatico.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="635">
-              <caret line="118" column="16" selection-start-line="118" selection-start-column="16" selection-end-line="118" selection-end-column="16" />
+            <state relative-caret-position="388">
+              <caret line="122" column="19" lean-forward="true" selection-start-line="122" selection-start-column="19" selection-end-line="122" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="analisadorLexico.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Projeto/Lexico/analisadorLexico.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
             </state>
           </provider>
         </entry>
@@ -63,6 +73,7 @@
         <option value="$PROJECT_DIR$/Projeto/tabelaTransicao.py" />
         <option value="$PROJECT_DIR$/Projeto/analisadorLexico.py" />
         <option value="$PROJECT_DIR$/Projeto/teste.mgol" />
+        <option value="$PROJECT_DIR$/Projeto/Sintatico/preencheTabelas.py" />
         <option value="$PROJECT_DIR$/Projeto/Sintatico/analisadorSintatico.py" />
       </list>
     </option>
@@ -93,6 +104,12 @@
               <item name="CompiladorMGol" type="b2602c69:ProjectViewProjectNode" />
               <item name="CompiladorMGol" type="462c0819:PsiDirectoryNode" />
               <item name="Projeto" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CompiladorMGol" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CompiladorMGol" type="462c0819:PsiDirectoryNode" />
+              <item name="Projeto" type="462c0819:PsiDirectoryNode" />
+              <item name="Lexico" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CompiladorMGol" type="b2602c69:ProjectViewProjectNode" />
@@ -158,6 +175,24 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
+    <configuration name="preencheTabelas" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="CompiladorMGol" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Projeto/Sintatico" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Projeto/Sintatico/preencheTabelas.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
     <configuration name="tabelaTransicao" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="CompiladorMGol" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -180,10 +215,12 @@
       <item itemvalue="Python.tabelaTransicao" />
       <item itemvalue="Python.analisadorLexico" />
       <item itemvalue="Python.main" />
+      <item itemvalue="Python.preencheTabelas" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.preencheTabelas" />
         <item itemvalue="Python.analisadorLexico" />
         <item itemvalue="Python.tabelaTransicao" />
       </list>
@@ -206,12 +243,12 @@
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.12065332" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.12065332" />
       <window_info anchor="bottom" id="TODO" order="10" />
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="3" />
       <window_info anchor="bottom" id="Python Console" order="0" />
-      <window_info anchor="bottom" id="Run" order="6" weight="0.2526096" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.36221296" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="1" weight="0.08053007" />
       <window_info id="Favorites" order="0" side_tool="true" />
@@ -356,6 +393,23 @@
     <entry file="file://$PROJECT_DIR$/Projeto/tabelaSimbolos.py" />
     <entry file="file://$PROJECT_DIR$/Projeto/tabelaTransicao.py" />
     <entry file="file://$PROJECT_DIR$/Projeto/analisadorLexico.py" />
+    <entry file="file://$PROJECT_DIR$/Projeto/Sintatico/preencheTabelas.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="31" column="7" lean-forward="true" selection-start-line="31" selection-start-column="7" selection-end-line="31" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Projeto/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
+          <folding>
+            <element signature="e#305#315#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Projeto/teste.mgol">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="675">
@@ -363,20 +417,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Projeto/main.py">
+    <entry file="file://$PROJECT_DIR$/Projeto/Lexico/analisadorLexico.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="3" selection-end-line="13" />
-          <folding>
-            <element signature="e#305#315#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="300">
+          <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Projeto/Sintatico/analisadorSintatico.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="635">
-          <caret line="118" column="16" selection-start-line="118" selection-start-column="16" selection-end-line="118" selection-end-column="16" />
+        <state relative-caret-position="388">
+          <caret line="122" column="19" lean-forward="true" selection-start-line="122" selection-start-column="19" selection-end-line="122" selection-end-column="19" />
         </state>
       </provider>
     </entry>
