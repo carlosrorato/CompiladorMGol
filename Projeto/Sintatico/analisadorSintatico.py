@@ -25,6 +25,8 @@ GREEN = '\033[92m'
 RED = "\033[1;31m"
 RESET = '\033[0m'
 
+# Cria uma string com o nome do token retornado pelo Léxico mais seu significado
+# para imprimir mensagem do tipo de erro ocorrido 
 def traduzToken(token):
     tokenTraduzido = token + "("
     if token == "Num":
@@ -47,11 +49,13 @@ def traduzToken(token):
         return tokenTraduzido + "Fecha Parêntesis - ')')"
     if token == "PT_V":
         return tokenTraduzido + "Ponto e Vírgula - ;)"
+
+    # Caso o token seja palavra reservada
     else:
         return token
 
-
-def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaPanico, arquivo):
+#Função principal do Analisador Sintático
+def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErros, arquivo):
 
     # Criação e preenchimento da tabela de transições do DFA
     TabelaTransicao = []
@@ -60,18 +64,20 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaPan
     # Criação e preenchimento da tabela de símbolos
     TabelaSimbolos = preenchePalavrasReservadas()
 
-    
-    #lista para simular pilha
+    # Lista para simular pilha
     pilha = []
-    #empilha estado inicial
+
+    # Empilha estado inicial
     pilha.append(0)
 
-
-    #Implementacao do algoritmo - conforme descrito no livro
-
-    #Seja "a" o primeiro símbolo da entrada
+    # Implementacao do algoritmo - conforme descrito no livro
+    # Seja "a" o primeiro símbolo da entrada
     while True:
+
+        # Recebe token completo do Léxico (token, lexema, tipo, linha, coluna) 
         b = analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos)
+
+        # Recebe apenas o valor da chave 'token' do dicionário recebido por b
         a = b["token"]
 
         # Aqui, ele deve prosseguir a analise, independente dos erros (que mesmo assim sao mostrados na tela)
@@ -79,37 +85,52 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaPan
         if a != "Comentário" and a != "ERRO":
             break
 
-    flagSimbolo = False  # Flag para indicar o erro onde falta um símbolo
-    a_antigo = a
-    flagErro = False # Flag para indicar a ocorrencia de erros
+    # Flag para indicar o erro onde falta um símbolo
+    flagSimbolo = False  
+
+    # Guarda o último valor de a para tratamento de erro, se necessário
+    aAntigo = a
+
+    # Flag para indicar a ocorrencia de erros
+    flagErro = False 
+
+    # Inicializa célula para caso de erro sintático no primeiro token
     celula = ""
 
-    #Repetir indefinidamente
+    # Repetir indefinidamente
     while(1):
-        #Seja "s" o estado do topo da pilha
+
+        # Seja "s" o estado do topo da pilha
         s = pilha[len(pilha) - 1]
 
-        #Verificando os dados nas tabelas
-
+        # Verificando os dados nas tabelas
         if tabelaAcoes[int(s)].get(a):
             celula = tabelaAcoes[int(s)].get(a)
 
-            #separacao do aux em letra e numero
+            # Separação do aux em letra e numero, para descobrir a ação a ser feita e o estado 
+            # usado na ação 
             operacao = celula[0]
             t = celula.translate({ord('S'): None, ord('R'): None})
+
+        # Indica que não há transição para o token recebido no estado atual
         else:
             t = 0
 
         # IF ACTION(s,a) = shift t
         if t and operacao == "S":
+
             # empilha t na pilha
             pilha.append(t)
 
             # seja "a" o prox simbolo da entrada: loop para evitar comentarios
             while True:
-                if flagSimbolo: # Caso tenha no passo anterior dado um erro de um unico simbolo
-                    a = a_antigo
+
+                # Caso tenha no passo anterior dado um erro de um unico simbolo
+                if flagSimbolo: 
+                    a = aAntigo
                     flagSimbolo = False
+
+                # Lê um novo token do Léxico
                 else:
                     b = analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos)
                     a = b["token"]
@@ -121,104 +142,144 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaPan
 
         #ELSE IF ACTION(s,a) = reduce A->B
         elif t and operacao == "R":
-            #Aqui, o t vai ser o numero da regra
-            #desempilha |B| símbolos da pilha
+
+            # Aqui, o t vai ser o numero da regra
             x = tabelaQtdSimbolos[int(t) - 1].get("TamanhoBeta")
             A = tabelaQtdSimbolos[int(t) - 1].get("A")
             B = tabelaQtdSimbolos[int(t) - 1].get("Beta")
 
+            # desempilha |B| símbolos da pilha
             if x:
                 for i in range(0, int(x)):
                     pilha.pop()
 
-            #faça t ser o topo da pilha
-
+            # faça t ser o topo da pilha
             t = pilha[len(pilha) - 1]
 
-            #empilha GOTO[t,A]
-
+            # empilha GOTO[t,A]
             if tabelaDesvios[int(t)].get(A):
+
                 # Na tabela dos desvios a celula contem apenas o numero do estado
                 valor = tabelaDesvios[int(t)].get(A)
-
                 pilha.append(valor)
-            #imprima a producao A->B
 
+            # imprima a producao A->B
             print("Regra aplicada: " + A +" -> " + B + RESET)
 
-
+        # Chegou no estado de aceitação da análise, seja de forma correta ou por causa da recuperação
+        # de erros
         elif celula == "aceita":
+
+            # Questões estéticas
             print()
             print(BOLD + "----------------------------------------------------------------")
+
+            # Houve recuperação de erros
             if flagErro:
                 print("Análise Sintática finalizada: " + RESET + "foram encontrados erros. " + RED + "Falha!")
+            
+            # Análise finalizada sem erros
             else:
                 print("Análise Sintática finalizada: " + GREEN + "aceitou!")
+
+            # Questões estéticas
             print(RESET + BOLD + "----------------------------------------------------------------")    
+            
+            # Finaliza a execução do Sintático
             return
 
+        # Se não houver transição na tabela de ações - t = 0
         else:
             flagErro = True
-
+            
+            # Inicializa dicionário para símbolos que faltam e lista para imprimi-los
             simbolosFaltando = {}
-
             listaParaImprimir = ""
 
+            # Verifica na tabela de ações quais símbolos possuem transições dado o estado atual s,
+            # adiciona no dicionário e cria a lista para impressão
             for k,v in tabelaAcoes[int(s)].items():
                 if v != '' and k!='Estado':
                     simbolosFaltando.update({k : v})
                     nomeToken = traduzToken(k)
                     listaParaImprimir = listaParaImprimir + " " + str(nomeToken)
 
-            print(RED + BOLD + "Erro Sintático. " + RESET + "Linha: " + b.get("linha") +" Coluna: " + b.get("coluna") +" Faltando algum do(s) símbolo(s):" + BOLD + CYANDARK + listaParaImprimir + RESET)
+            # Imprime os símbolos que faltam para prosseguir a análise sintática
+            # com o acréscimo de constantes por questões estéticas
+            print(RED + BOLD + "\nErro Sintático. " + RESET + "Linha: " + b.get("linha") +" Coluna: " + b.get("coluna") +" Faltando algum do(s) símbolo(s):" + BOLD + CYANDARK + listaParaImprimir + RESET)
 
-            #Verificando a quantidade de simbolos no dicionario
+            # Verificando a quantidade de simbolos no dicionario
             if len(simbolosFaltando) == 1:
+                # Se for apenas um símbolo, o insere na análise para continuá-la
                 print(BOLD + "\tTratamento de erro." + RESET + " Inserindo símbolo ausente...")
-
                 chave = [key for key in simbolosFaltando.keys()]
 
                 # para armazenar o último token lido
-                a_antigo = a
+                aAntigo = a
 
+                # o token atual passa a ser o simbolo que faltava para continuar a análise
                 a = chave[0]
 
-                flagSimbolo = True #Flag para indicar o erro onde falta um símbolo
+                # Flag para indicar o erro onde falta um símbolo
+                flagSimbolo = True 
 
+                # Questões estéticas
                 print("\t" + CYANDARK + BOLD + a + RESET + " inserido para prosseguir a análise.")
                 print(BOLD + "\tFim de tratamento de erro\n" + RESET)
 
+            # Mais de uma possibilidade de símbolos que poderiam ser inseridos para prosseguir a 
+            # análise
             else:
+                # Questões estéticas
                 print(BOLD + "\t\tIniciando tratamento de erro." + RESET + " À procura de um token sincronizante...")
-                listaFollow = tabelaPanico[int(s)].get('Follow')
-                teste = 1
-                while (teste):
+                
+                # Obtem a lista de símbolos do conjunto Follow do não terminal à esquerda da primeira
+                # regra do estado atual(topo da pilha) para resincronizar a análise
+                listaFollow = tabelaErros[int(s)].get('Follow')
+                aux = 1
+
+                # Procura um token que está na lista de símbolos do conjunto Follow, descartando
+                # os tokens recebidos do Léxico até encontrar ou finalizar o arquivo 
+                while (aux):
                     while True:
+
+                        # Recebe um token do Léxico
                         a = analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos)["token"]
-                        # Aqui, ele deve prosseguir a analise, independente dos erros (que mesmo assim sao mostrados na tela)
-                        # e dos comentarios, alem de tratar o fim de arquivo
+                        
+                        # Se for $(EOF), não foi encontrado um token para sincronizar a análise
+                        # antes do fim do arquivo
                         if a == "$":
+
+                            # Questões estéticas
                             print("\t\tArquivo finalizado. Não foi possível concluir a recuperação...")
                             print(BOLD + "\t\tFim de tratamento de erro\n")
                             print(BOLD + "\n----------------------------------------------------------------")
                             print("Análise Sintática finalizada: " + RESET + "foram encontrados erros. " + RED + "Falha!")
                             print(RESET + BOLD + "----------------------------------------------------------------")
                             return
+
+                        # Aqui, ele deve prosseguir a analise, independente dos erros (que mesmo assim sao mostrados na tela)
+                        # e dos comentarios, alem de tratar o fim de arquivo
                         elif a != "Comentário" and a != "ERRO":
                             break
+
+                    # Verifica se o último token lido está na lista do conjunto Follow
+                    # saindo do loop da linha 243 caso encontre
                     for token in listaFollow:
                         if token == a:
-                            teste = 0
+                            aux = 0
                             break
+
+                # Questões estéticas
                 print("\t\tEncontrado token sincronizante: " + CYANDARK + BOLD + a + RESET)
 
-                x = tabelaPanico[int(s)].get('QtdSimbolos')
+                # Obtém a quantidade de símbolos empilhados relacionados à primeira regra do estado
+                # atual e desempilha-os para continuar a análise de forma correta
+                x = tabelaErros[int(s)].get('QtdSimbolos')
                 if x:
                     for i in range(0, int(x)):
                         pilha.pop()
-                print(BOLD + "\t\tRetomando análise sintática" + RESET)
+
+                # Questões estéticas
+                print(BOLD + "\t\tRetomando análise sintática\n" + RESET)
                 
-## Faltando
-# arrumar linha e coluna do erro sintático para exibir na tela
-# arrumar erro léxico quando finaliza arquivo com \n e e está no meio do modo pânico
-# 
