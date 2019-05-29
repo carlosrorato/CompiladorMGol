@@ -7,7 +7,7 @@
 # Módulo: Main
 # Função principal do programa, que
 # integra todos os outros módulos do
-# compilador
+# compilador(Léxico e Sintático)
 #
 # Alunos: Carlos Henrique Rorato Souza
 # e Larissa Santos de Azevedo
@@ -45,7 +45,7 @@ tabelaPanico = preencheTabelaPanico()
 
 # Abre o arquivo passado como argumento
 argumentos = sys.argv
-arq = open("teste.mgol", encoding="utf-8")
+arq = open(argumentos[1], encoding="utf-8")
 
 # Chama o léxico e immprime o resultado
 #while(1):

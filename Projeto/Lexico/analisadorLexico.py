@@ -105,7 +105,7 @@ def analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos):
             # Verifica se o char é o EOF e retorna o último token
             if not char:  
                 # Se o token estiver vazio, imprime a mensagem de erro e muda o valor da tupla
-                if tupla['token'] == '':
+                if tupla['token'] == '' and tupla['lexema'] != '':
 
                     # Verifica o tipo de erro
                     if abreAspas % 2 != 0:
@@ -120,6 +120,8 @@ def analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos):
                 elif tupla["token"] == "id":
                     tupla = procuraToken(tupla, TabelaSimbolos)
                     tupla.update({"linha": str(dadosErro["linha"]), "coluna": str(dadosErro["colAtual"])})
+                else:
+                    tupla = {"lexema": "EOF", "token": "$", "tipo": "null", "linha": str(dadosErro["linha"]),"coluna": str(dadosErro["colAtual"])}
                 return tupla
 
             # Se o token estiver vazio, imprime a mensagem de erro e retorna tupla de erro

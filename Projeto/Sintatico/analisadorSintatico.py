@@ -26,26 +26,29 @@ RED = "\033[1;31m"
 RESET = '\033[0m'
 
 def traduzToken(token):
+    tokenTraduzido = token + "("
     if token == "Num":
-        return "Número"
+        return tokenTraduzido + "Número)" 
     if token == "Literal":
-        return "Literal"
+        return tokenTraduzido + "Literal)"
     if token == "id":
-        return "Identificador"
+        return tokenTraduzido + "Identificador)"
     if token == "Comentário":
-        return "Comentário"
+        return tokenTraduzido + "Comentário)"
     if token == "OPM":
-        return "Operador Matemático"
+        return tokenTraduzido + "Operador Matemático)"
     if token == "OPR":
-        return "Operador Relacional"
+        return tokenTraduzido + "Operador Relacional)"
     if token == "RCB":
-        return "Atribuição"
+        return tokenTraduzido + "Atribuição)"
     if token == "AB_P":
-        return "Abre Parêntesis"
+        return tokenTraduzido + "Abre Parêntesis - '(')"
     if token == "FC_P":
-        return "Fecha Parêntesis"
+        return tokenTraduzido + "Fecha Parêntesis - ')')"
     if token == "PT_V":
-        return "Ponto e Vírgula"
+        return tokenTraduzido + "Ponto e Vírgula - ;)"
+    else:
+        return token
 
 
 def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaPanico, arquivo):
@@ -68,7 +71,8 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaPan
 
     #Seja "a" o primeiro símbolo da entrada
     while True:
-        a = analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos)["token"]
+        b = analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos)
+        a = b["token"]
 
         # Aqui, ele deve prosseguir a analise, independente dos erros (que mesmo assim sao mostrados na tela)
         # e dos comentarios
@@ -78,6 +82,7 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaPan
     flagSimbolo = False  # Flag para indicar o erro onde falta um símbolo
     a_antigo = a
     flagErro = False # Flag para indicar a ocorrencia de erros
+    celula = ""
 
     #Repetir indefinidamente
     while(1):
@@ -162,9 +167,10 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaPan
             for k,v in tabelaAcoes[int(s)].items():
                 if v != '' and k!='Estado':
                     simbolosFaltando.update({k : v})
-                    listaParaImprimir = listaParaImprimir + " " + traduzToken(k)
+                    nomeToken = traduzToken(k)
+                    listaParaImprimir = listaParaImprimir + " " + str(nomeToken)
 
-            print(RED + BOLD + "Erro Sintático. " + RESET + "Linha:" + b.get("linha") +" Coluna:" + b.get("coluna") +" Faltando algum do(s) símbolo(s): " + BOLD + CYANDARK + listaParaImprimir + RESET)
+            print(RED + BOLD + "Erro Sintático. " + RESET + "Linha: " + b.get("linha") +" Coluna: " + b.get("coluna") +" Faltando algum do(s) símbolo(s):" + BOLD + CYANDARK + listaParaImprimir + RESET)
 
             #Verificando a quantidade de simbolos no dicionario
             if len(simbolosFaltando) == 1:
@@ -180,7 +186,7 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaPan
                 flagSimbolo = True #Flag para indicar o erro onde falta um símbolo
 
                 print("\t" + CYANDARK + BOLD + a + RESET + " inserido para prosseguir a análise.")
-                print(BOLD + "\tFim de tratamento de erro\n")
+                print(BOLD + "\tFim de tratamento de erro\n" + RESET)
 
             else:
                 print(BOLD + "\t\tIniciando tratamento de erro." + RESET + " À procura de um token sincronizante...")

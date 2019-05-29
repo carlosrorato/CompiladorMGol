@@ -1,13 +1,3 @@
-{este eh um programa teste em Mgol
-elaborado por Carlos Henrique Rorato
-e Larissa Santos}
-
 inicio
     varinicio
-        B inteiro;
-    varfim;
-
-   escreva "Digite um numero:";
-   leia B;
-
-   B <- ;
+        B lit;$ 
