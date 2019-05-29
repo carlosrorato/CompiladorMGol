@@ -67,7 +67,7 @@ def analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos):
     abreAspas = 0
     abreChaves = 0
 
-    tupla = {"lexema": "", "token": "", "tipo": "null"}
+    tupla = {"lexema": "", "token": "", "tipo": "null", "linha": "","coluna": ""}
 
     # Lê o caracter, incrementa o contador da coluna atual, vai para o estado 0 e reseta a palavra
     char = arquivo.read(1)
@@ -85,7 +85,7 @@ def analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos):
 
     # Verifica se chegou ao final do arquivo
     if not char:  
-        return {"lexema": "EOF", "token": "$", "tipo": "null"}
+        return {"lexema": "EOF", "token": "$", "tipo": "null", "linha": str(dadosErro["linha"]),"coluna": str(dadosErro["colAtual"])}
 
     while True:
         # Fazendo o incremento da linha, zerando a coluna para caso de erro e armazenando a coluna anterior
@@ -116,9 +116,10 @@ def analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos):
                         tipoErro = "Caractere invalido"
 
                     print(RED + "Erro léxico. " + RESET + tipoErro + ": "+ palavra + " - Linha " + str(dadosErro["linha"]) + ", Coluna " + str(dadosErro["colAtual"]))
-                    tupla = {"lexema": palavra, "token": "ERRO", "tipo": "null"}
+                    tupla = {"lexema": palavra, "token": "ERRO", "tipo": "null", "linha": str(dadosErro["linha"]), "coluna": str(dadosErro["colAtual"])}
                 elif tupla["token"] == "id":
                     tupla = procuraToken(tupla, TabelaSimbolos)
+                    tupla.update({"linha": str(dadosErro["linha"]), "coluna": str(dadosErro["colAtual"])})
                 return tupla
 
             # Se o token estiver vazio, imprime a mensagem de erro e retorna tupla de erro
@@ -135,7 +136,7 @@ def analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos):
                 # imprimindo a linha e coluna do erro
                     print(RED + "Erro léxico. " + RESET + tipoErro + ": " + char + " - Linha " + str(
                         dadosErro["linha"]) + ", Coluna " + str(dadosErro["colAtual"]))
-                tupla = {"lexema": char, "token": "ERRO", "tipo": "null"}
+                tupla = {"lexema": char, "token": "ERRO", "tipo": "null", "linha": str(dadosErro["linha"]),"coluna": str(dadosErro["colAtual"])}
                 return tupla
             
             # Se a tupla não estiver vazia, volta o carro de leitura para o último caracter aceito para
@@ -157,6 +158,7 @@ def analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos):
             # Se é identificador, procura na Tabela de Símbolos pela entrada
             if tupla["token"] == "id":
                 tupla = procuraToken(tupla, TabelaSimbolos)
+                tupla.update({"linha": str(dadosErro["linha"]),"coluna": str(dadosErro["colAtual"])})
 
             # Retorna tupla com o token != de ERRO    
             return tupla
@@ -167,7 +169,7 @@ def analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos):
             palavra = palavra + char
             distanciaUltimoAceito = 1
             token = verifica_token_dfa(estado)
-            tupla = {"lexema": palavra, "token": token, "tipo": "null"}
+            tupla = {"lexema": palavra, "token": token, "tipo": "null", "linha": str(dadosErro["linha"]),"coluna": str(dadosErro["colAtual"])}
 
         # Caso exista transição e o novo estado não é atual, adiciona o caracter lido na palavra.
         # Caso o caracter seja espaço, \n ou \t, nada é feito para que sejam reconhecidos e ignorados 

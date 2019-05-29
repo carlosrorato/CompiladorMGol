@@ -25,6 +25,29 @@ GREEN = '\033[92m'
 RED = "\033[1;31m"
 RESET = '\033[0m'
 
+def traduzToken(token):
+    if token == "Num":
+        return "Número"
+    if token == "Literal":
+        return "Literal"
+    if token == "id":
+        return "Identificador"
+    if token == "Comentário":
+        return "Comentário"
+    if token == "OPM":
+        return "Operador Matemático"
+    if token == "OPR":
+        return "Operador Relacional"
+    if token == "RCB":
+        return "Atribuição"
+    if token == "AB_P":
+        return "Abre Parêntesis"
+    if token == "FC_P":
+        return "Fecha Parêntesis"
+    if token == "PT_V":
+        return "Ponto e Vírgula"
+
+
 def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaPanico, arquivo):
 
     # Criação e preenchimento da tabela de transições do DFA
@@ -139,9 +162,9 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaPan
             for k,v in tabelaAcoes[int(s)].items():
                 if v != '' and k!='Estado':
                     simbolosFaltando.update({k : v})
-                    listaParaImprimir = listaParaImprimir + " " + str(k) 
+                    listaParaImprimir = listaParaImprimir + " " + traduzToken(k)
 
-            print(RED + BOLD + "Erro Sintático. " + RESET + "Faltando algum do(s) símbolo(s): " + BOLD + CYANDARK + listaParaImprimir + RESET)
+            print(RED + BOLD + "Erro Sintático. " + RESET + "Linha:" + b.get("linha") +" Coluna:" + b.get("coluna") +" Faltando algum do(s) símbolo(s): " + BOLD + CYANDARK + listaParaImprimir + RESET)
 
             #Verificando a quantidade de simbolos no dicionario
             if len(simbolosFaltando) == 1:
