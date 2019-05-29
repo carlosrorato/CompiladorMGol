@@ -49,7 +49,7 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaPan
 
         # Aqui, ele deve prosseguir a analise, independente dos erros (que mesmo assim sao mostrados na tela)
         # e dos comentarios
-        if a != "Comentário" and a != "Erro":
+        if a != "Comentário" and a != "ERRO":
             break
 
     flagSimbolo = False  # Flag para indicar o erro onde falta um símbolo
@@ -88,7 +88,7 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaPan
 
                 # Aqui, ele deve prosseguir a analise, independente dos erros (que mesmo assim sao mostrados na tela)
                 # e dos comentarios
-                if a != "Comentário" and a != "Erro":
+                if a != "Comentário" and a != "ERRO":
                     break
 
         #ELSE IF ACTION(s,a) = reduce A->B
@@ -157,6 +157,7 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaPan
                 flagSimbolo = True #Flag para indicar o erro onde falta um símbolo
 
                 print("\t" + CYANDARK + BOLD + a + RESET + " inserido para prosseguir a análise.")
+                print(BOLD + "\tFim de tratamento de erro\n")
 
             else:
                 print(BOLD + "\t\tIniciando tratamento de erro." + RESET + " À procura de um token sincronizante...")
@@ -169,12 +170,12 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaPan
                         # e dos comentarios, alem de tratar o fim de arquivo
                         if a == "$":
                             print("\t\tArquivo finalizado. Não foi possível concluir a recuperação...")
-                            print(BOLD + "\t\tFim de tratamento de erro")
+                            print(BOLD + "\t\tFim de tratamento de erro\n")
                             print(BOLD + "\n----------------------------------------------------------------")
                             print("Análise Sintática finalizada: " + RESET + "foram encontrados erros. " + RED + "Falha!")
                             print(RESET + BOLD + "----------------------------------------------------------------")
                             return
-                        elif a != "Comentário" and a != "Erro":
+                        elif a != "Comentário" and a != "ERRO":
                             break
                     for token in listaFollow:
                         if token == a:
