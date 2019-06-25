@@ -18,6 +18,7 @@ from Lexico.tabelaSimbolos import *
 from Lexico.analisadorLexico import *
 from Sintatico.analisadorSintatico import *
 from Sintatico.preencheTabelas import *
+from Semantico.analisadorSemantico import *
 
 # Preenche as tabelas utilizadas pelo Analisador Sintático
 tabelaAcoes = preencheTabelaAcoes()
@@ -27,9 +28,12 @@ tabelaErros = preencheTabelaErros()
 
 # Abre o arquivo passado como argumento
 argumentos = sys.argv
-arq = open(argumentos[1], encoding="utf-8")
+# arqFonte = open(argumentos[1], encoding="utf-8")
+arqFonte = open("fonte.alg", encoding="utf-8")
+arqDestino = open("programa.c", "w+")
 
 # Chama o Analisador Sintático
-analisadorSintatico(tabelaAcoes,tabelaDesvios,tabelaQtdSimbolos, tabelaErros, arq)
+analisadorSintatico(tabelaAcoes,tabelaDesvios,tabelaQtdSimbolos, tabelaErros, arqFonte, arqDestino)
 
-arq.close()
+arqDestino.close()
+arqFonte.close()

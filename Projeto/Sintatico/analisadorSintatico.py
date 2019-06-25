@@ -16,6 +16,7 @@
 from Lexico.analisadorLexico import *
 from Lexico.tabelaSimbolos import *
 from Lexico.tabelaTransicao import *
+from Semantico.analisadorSemantico import *
 
 # Cores para formatar saída 
 BOLD = '\033[1m'
@@ -31,9 +32,9 @@ def imprimir(texto, arquivo):
     print("mensagem impressa no arquivo: " + texto)
     return
 
-# SEMANTICO  ****** Função que aplica as regras semânticas
-def analisadorSemantico(t, A, tokensParaValidacao, arquivoDestino):
-    return
+# SEMANTICO  ****** Função que aplica as regras semânticas - EM analisadorSemantico.py
+# def analisadorSemantico(t, A, tokensParaValidacao, arquivoDestino):
+#     return
 
 # Cria uma string com o nome do token retornado pelo Léxico mais seu significado
 # para imprimir mensagem do tipo de erro ocorrido 
