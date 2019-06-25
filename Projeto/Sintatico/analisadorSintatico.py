@@ -29,6 +29,9 @@ RESET = '\033[0m'
 def imprimir(texto, arquivo):
     return
 
+def analisadorSemantico(t, A, tokensParaValidacao, arquivoDestino):
+    return 
+
 # Cria uma string com o nome do token retornado pelo Léxico mais seu significado
 # para imprimir mensagem do tipo de erro ocorrido 
 def traduzToken(token):
@@ -58,8 +61,9 @@ def traduzToken(token):
     else:
         return token
 
+# SEMANTICO  ****** a função agora recebe também o arquivoDestino, o arquivo .c
 #Função principal do Analisador Sintático
-def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErros, arquivo):
+def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErros, arquivo, arquivoDestino):
 
     # Criação e preenchimento da tabela de transições do DFA
     TabelaTransicao = []
@@ -172,6 +176,9 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
                     # Esses N tokens são os que formam a regra e os que você vai usar na validação semântica.
                     tokensParaValidacao.append(pilha_semantica.pop())
 
+            # SEMANTICO  ****** Acho que aqui temos que aplicar a regra.
+            analisadorSemantico(t, A, tokensParaValidacao, arquivoDestino)
+
             # faça t ser o topo da pilha
             t = pilha[len(pilha) - 1]
 
@@ -182,7 +189,7 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
                 valor = tabelaDesvios[int(t)].get(A)
                 pilha.append(valor)
 
-                # SEMANTICO  ****** Acho que aqui temos que aplicar a regra e empilhar o não terminal!
+                # SEMANTICO  ****** Acho que aqui temos que empilhar o não terminal!
 
 
             # imprima a producao A->B
