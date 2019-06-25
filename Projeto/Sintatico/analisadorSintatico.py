@@ -25,6 +25,10 @@ GREEN = '\033[92m'
 RED = "\033[1;31m"
 RESET = '\033[0m'
 
+# SEMANTICO  ****** Função para imprimir no arquivo .c
+def imprimir(texto, arquivo):
+    return
+
 # Cria uma string com o nome do token retornado pelo Léxico mais seu significado
 # para imprimir mensagem do tipo de erro ocorrido 
 def traduzToken(token):
@@ -67,8 +71,14 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
     # Lista para simular pilha
     pilha = []
 
+    # SEMANTICO  ****** Lista para a pilha auxiliar
+    pilha_semantica = []
+
     # Empilha estado inicial
     pilha.append(0)
+
+    # SEMANTICO  ****** Empilha uma "tupla inicial"
+    pilha_semantica.append({"lexema": "null", "token": "", "tipo": "null", "linha": "","coluna": ""})
 
     # Implementacao do algoritmo - conforme descrito no livro
     # Seja "a" o primeiro símbolo da entrada
@@ -122,6 +132,9 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
             # empilha t na pilha
             pilha.append(t)
 
+            # SEMANTICO  ****** Empilha o token
+            pilha_semantica.append(b)
+
             # seja "a" o prox simbolo da entrada: loop para evitar comentarios
             while True:
 
@@ -148,10 +161,16 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
             A = tabelaQtdSimbolos[int(t) - 1].get("A")
             B = tabelaQtdSimbolos[int(t) - 1].get("Beta")
 
+            # SEMANTICO  ****** Estrutura para guardar os tokens desempilhados para a validação semântica
+            tokensParaValidacao = []
+
             # desempilha |B| símbolos da pilha
             if x:
                 for i in range(0, int(x)):
                     pilha.pop()
+                    # SEMANTICO  ****** Desempilhar os tokens também.
+                    # Esses N tokens são os que formam a regra e os que você vai usar na validação semântica.
+                    tokensParaValidacao.append(pilha_semantica.pop())
 
             # faça t ser o topo da pilha
             t = pilha[len(pilha) - 1]
@@ -162,6 +181,9 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
                 # Na tabela dos desvios a celula contem apenas o numero do estado
                 valor = tabelaDesvios[int(t)].get(A)
                 pilha.append(valor)
+
+                # SEMANTICO  ****** Acho que aqui temos que aplicar a regra e empilhar o não terminal!
+
 
             # imprima a producao A->B
             print("Regra aplicada: " + A +" -> " + B + RESET)
@@ -279,7 +301,8 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
                 if x:
                     for i in range(0, int(x)):
                         pilha.pop()
+                        # SEMANTICO  ****** Desempilhar os tokens também.
+                        pilha_semantica.pop()
 
                 # Questões estéticas
                 print(BOLD + "\t\tRetomando análise sintática\n" + RESET)
-                
