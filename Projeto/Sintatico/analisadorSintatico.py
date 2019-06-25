@@ -27,10 +27,13 @@ RESET = '\033[0m'
 
 # SEMANTICO  ****** Função para imprimir no arquivo .c
 def imprimir(texto, arquivo):
+    arquivo.write(texto)
+    print("mensagem impressa no arquivo: " + texto)
     return
 
+# SEMANTICO  ****** Função que aplica as regras semânticas
 def analisadorSemantico(t, A, tokensParaValidacao, arquivoDestino):
-    return 
+    return
 
 # Cria uma string com o nome do token retornado pelo Léxico mais seu significado
 # para imprimir mensagem do tipo de erro ocorrido 
