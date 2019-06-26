@@ -84,6 +84,9 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
 
         # Recebe token completo do Léxico (token, lexema, tipo, linha, coluna) 
         b = analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos)
+        # SEMANTICO atribuição de tipo
+        aux = atribuiTipo(b)
+        b = aux
 
         # Recebe apenas o valor da chave 'token' do dicionário recebido por b
         a = b["token"]
@@ -144,6 +147,9 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
                 # Lê um novo token do Léxico
                 else:
                     b = analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos)
+                    # SEMANTICO atribuição de tipo
+                    aux = atribuiTipo(b)
+                    b = aux
                     a = b["token"]
 
                 # Aqui, ele deve prosseguir a analise, independente dos erros (que mesmo assim sao mostrados na tela)
@@ -171,7 +177,7 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
                     tokensParaValidacao.append(pilha_semantica.pop())
 
             # SEMANTICO  ****** Acho que aqui temos que aplicar a regra.
-            analisadorSemantico(t, A, tokensParaValidacao, arquivoDestino)
+            # analisadorSemantico(t, A, tokensParaValidacao, arquivoDestino)
 
             # faça t ser o topo da pilha
             t = pilha[len(pilha) - 1]

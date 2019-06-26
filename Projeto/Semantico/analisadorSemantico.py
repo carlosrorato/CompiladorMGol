@@ -34,11 +34,7 @@ def atribuiTipo(tokenTupla):
 
 
 def analisadorSemantico(t, A, tokensParaValidacao, arquivoDestino):
-    #acho que isso vai dar problema. Temos que fazer isso quando o sintático recebe um token!
-    for i in range(0, len(tokensParaValidacao)):
-        aux = atribuiTipo(tokensParaValidacao[i])
-        tokensParaValidacao[i] = aux
-
+    
     if t == 5:
         imprimir("\n\n\n", arquivoDestino)
     elif t == 6:
@@ -46,7 +42,7 @@ def analisadorSemantico(t, A, tokensParaValidacao, arquivoDestino):
         id = tokensParaValidacao.pop()
         TIPO = tokensParaValidacao.pop()
         id['tipo'] = TIPO['tipo']
-        imprimir(TIPO['tipo'] + " " + id['lexema'] + ";")
+        imprimir(TIPO['tipo'] + " " + id['lexema'] + ";", arquivoDestino)
     elif t == 7:
         inteiro = tokensParaValidacao.pop()
         TIPO = {"lexema": "TIPO", "token": "TIPO", "tipo": inteiro['tipo'], "linha": "","coluna": ""}
