@@ -177,7 +177,7 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
                     tokensParaValidacao.append(pilha_semantica.pop())
 
             # SEMANTICO  ****** Acho que aqui temos que aplicar a regra.
-            # analisadorSemantico(t, A, tokensParaValidacao)
+            analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos)
 
             # faça t ser o topo da pilha
             t = pilha[len(pilha) - 1]
@@ -210,6 +210,9 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
             # Análise finalizada sem erros
             else:
                 print("Análise Sintática finalizada: " + GREEN + "aceitou!")
+
+                #SEMÂNTICO - FAZ O ARQUIVO .C
+                imprimirArquivo(nomeArquivoDestino)
 
             # Questões estéticas
             print(RESET + BOLD + "----------------------------------------------------------------")    
