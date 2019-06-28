@@ -37,8 +37,21 @@ def imprimirArquivo(nomeArquivoDestino):
     arqDestino.write("typedef char literal[256];")
     arqDestino.write("void main(void){")
 
+    #imprimindo variáveis temporárias
+    arqDestino.write("\t/*----Variaveis temporarias----*/")
+    for texto in TextoVariaveisTemporarias:
+        arqDestino.write("\t"+str(texto))
+    arqDestino.write("\t/*------------------------------*/")
+
+    #imprimindo corpo do texto
+    for texto in TextoArquivo:
+        arqDestino.write("\t"+str(texto))
+
     #fim do arquivo
     arqDestino.write("}")
+
+    arqDestino.close()
+    return
 
 
 
