@@ -57,7 +57,7 @@ def traduzToken(token):
 
 # SEMANTICO  ****** a função agora recebe também o arquivoDestino, o arquivo .c
 #Função principal do Analisador Sintático
-def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErros, arquivo, arquivoDestino):
+def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErros, arquivo, nomeArquivoDestino):
 
     # Criação e preenchimento da tabela de transições do DFA
     TabelaTransicao = []
@@ -177,7 +177,7 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
                     tokensParaValidacao.append(pilha_semantica.pop())
 
             # SEMANTICO  ****** Acho que aqui temos que aplicar a regra.
-            # analisadorSemantico(t, A, tokensParaValidacao, arquivoDestino)
+            # analisadorSemantico(t, A, tokensParaValidacao)
 
             # faça t ser o topo da pilha
             t = pilha[len(pilha) - 1]

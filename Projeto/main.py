@@ -30,7 +30,6 @@ tabelaErros = preencheTabelaErros()
 argumentos = sys.argv
 # arqFonte = open(argumentos[1], encoding="utf-8")
 arqFonte = open("fonte.alg", encoding="utf-8")
-arqDestino = open("programa.c", "w+")
 
 # Chama o Analisador Sintático
 analisadorSintatico(tabelaAcoes,tabelaDesvios,tabelaQtdSimbolos, tabelaErros, arqFonte, arqDestino)

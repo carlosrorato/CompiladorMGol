@@ -11,6 +11,7 @@
 # e Larissa Santos de Azevedo
 
 TextoArquivo = []
+TextoVariaveisTemporarias = []
 
 # Função que atribui tipo para tokens especificados na descrição do trabalho(n 2 pagina 3)
 def atribuiTipo(tokenTupla):
@@ -28,9 +29,19 @@ def atribuiTipo(tokenTupla):
         tokenTupla['tipo'] = '='
     return tokenTupla
 
-def imprimirArquivo(arquivoDestino):
-    arquivoDestino.write()
-    return
+def imprimirArquivo(nomeArquivoDestino):
+    arqDestino = open(str(nomeArquivoDestino)+".c", "w+")
+
+    #imprimindo cabeçalho
+    arqDestino.write("#include<stdio.h>")
+    arqDestino.write("typedef char literal[256];")
+    arqDestino.write("void main(void){")
+
+    #fim do arquivo
+    arqDestino.write("}")
+
+
+
 def analisadorSemantico(t, A, tokensParaValidacao):
     
     if t == 5:
