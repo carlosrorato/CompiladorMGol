@@ -10,11 +10,7 @@
 # Alunos: Carlos Henrique Rorato Souza
 # e Larissa Santos de Azevedo
 
-# Função para imprimir no arquivo .c
-def imprimir(texto, arquivo):
-    arquivo.write(texto)
-    print("mensagem impressa no arquivo: " + texto)
-    return
+TextoArquivo = []
 
 # Função que atribui tipo para tokens especificados na descrição do trabalho(n 2 pagina 3)
 def atribuiTipo(tokenTupla):
@@ -32,17 +28,19 @@ def atribuiTipo(tokenTupla):
         tokenTupla['tipo'] = '='
     return tokenTupla
 
-
-def analisadorSemantico(t, A, tokensParaValidacao, arquivoDestino):
+def imprimirArquivo(arquivoDestino):
+    arquivoDestino.write()
+    return
+def analisadorSemantico(t, A, tokensParaValidacao):
     
     if t == 5:
-        imprimir("\n\n\n", arquivoDestino)
+        TextoArquivo.append("\n\n\n")
     elif t == 6:
         #D -> id TIPO;
         id = tokensParaValidacao.pop()
         TIPO = tokensParaValidacao.pop()
         id['tipo'] = TIPO['tipo']
-        imprimir(TIPO['tipo'] + " " + id['lexema'] + ";", arquivoDestino)
+        TextoArquivo.append(TIPO['tipo'] + " " + id['lexema'] + ";")
     elif t == 7:
         inteiro = tokensParaValidacao.pop()
         TIPO = {"lexema": "TIPO", "token": "TIPO", "tipo": inteiro['tipo'], "linha": "","coluna": ""}
@@ -59,17 +57,17 @@ def analisadorSemantico(t, A, tokensParaValidacao, arquivoDestino):
         id = tokensParaValidacao.pop()
 
         if id['tipo'] == "literal":
-            imprimir("scanf(“%s”, " + id['lexema'] + ");",arquivoDestino)
+            TextoArquivo.append("scanf(“%s”, " + id['lexema'] + ");")
         elif id['tipo'] == "inteiro":
-            imprimir("scanf(“%d”, &" + id['lexema'] + ");",arquivoDestino)
+            TextoArquivo.append("scanf(“%d”, &" + id['lexema'] + ");")
         elif id['tipo'] == "real":
-            imprimir("scanf(“%lf”, &" + id['lexema'] + ");", arquivoDestino)
+            TextoArquivo.append("scanf(“%lf”, &" + id['lexema'] + ");")
         else:
             print("Erro: Variável não declarada!")
     elif t == 12:
         # desempilhar dois símbolos, para chegar no arg
         arg = tokensParaValidacao.pop()
         arg = tokensParaValidacao.pop()
-        imprimir("printf(\""+arg['lexema']+"\");", arquivoDestino)
+        TextoArquivo.append("printf(\""+arg['lexema']+"\");")
     
     return
