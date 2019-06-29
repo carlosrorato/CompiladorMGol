@@ -184,7 +184,11 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
         opm = tokensParaValidacao.pop()
         OPRD2 = tokensParaValidacao.pop()
 
-        if OPRD1['tipo'] == OPRD2['tipo'] and OPRD1['tipo'] != "literal":
+        tipo1 = OPRD1['tipo']
+        tipo2 = OPRD2['tipo']
+
+        #tipos iguais ou equivalentes
+        if (tipo1 == tipo2 or (tipo1 == 'real' and tipo2 == 'inteiro') or (tipo1 == 'inteiro' and tipo2 == 'real')) and tipo1 != "literal":
             #gerar uma variável temporária Tx
             TextoVariaveisTemporarias.append(str(OPRD2['tipo'])+" T"+ str(contadorTemporarias) +";")
             Tupla['lexema'] = "T"+str(contadorTemporarias)
@@ -218,6 +222,37 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
         Tupla['coluna'] = num['coluna']
     elif t == 23:
         TextoArquivo.append("}")
-    
+    elif t == 24:
+        #CABEÇALHO -> se (EXPR) então
+        #desempilhar três símbolos para chegar no EXPR
+        EXP_R = tokensParaValidacao.pop()
+        EXP_R = tokensParaValidacao.pop()
+        EXP_R = tokensParaValidacao.pop()
 
+        TextoArquivo.append("if ("+ EXP_R['lexema']+"){")
+    elif t == 25:
+        # ATENÇÃO: coloquei esse global porquê o compilador brigou kkk se der problema tem que tirar
+        global contadorTemporarias
+        print("Gerada variável temporária T" + str(contadorTemporarias))
+
+        # EXP_R -> OPRD1 opr OPRD2
+        OPRD1 = tokensParaValidacao.pop()
+        opr = tokensParaValidacao.pop()
+        OPRD2 = tokensParaValidacao.pop()
+
+        tipo1 = OPRD1['tipo']
+        tipo2 = OPRD2['tipo']
+
+        # tipos iguais ou equivalentes
+        if tipo1 == tipo2 or (tipo1 == 'real' and tipo2 == 'inteiro') or (tipo1 == 'inteiro' and tipo2 == 'real'):
+            # gerar uma variável temporária Tx
+            TextoVariaveisTemporarias.append(str(OPRD2['tipo']) + " T" + str(contadorTemporarias) + ";")
+            Tupla['lexema'] = "T" + str(contadorTemporarias)
+            TextoArquivo.append(
+                "T" + str(contadorTemporarias) + " = " + OPRD1['lexema'] + opr['tipo'] + OPRD2['lexema'] + ";")
+            contadorTemporarias += 1
+        else:
+            print("Erro: Operandos com tipos incompatíveis.")
+
+        # As próximas regras não possuem regras semânticas
     return Tupla

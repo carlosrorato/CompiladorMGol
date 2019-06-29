@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="44ea3100-a3b0-40f9-a462-e6a8c1b77a48" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/Projeto/Semantico/analisadorSemantico.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/Semantico/analisadorSemantico.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projeto/Sintatico/analisadorSintatico.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/Sintatico/analisadorSintatico.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -38,8 +37,8 @@
       <file leaf-file-name="analisadorSemantico.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Projeto/Semantico/analisadorSemantico.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="735">
-              <caret line="220" column="4" selection-start-line="220" selection-start-column="4" selection-end-line="220" selection-end-column="4" />
+            <state relative-caret-position="810">
+              <caret line="255" lean-forward="true" selection-start-line="255" selection-end-line="255" />
             </state>
           </provider>
         </entry>
@@ -572,8 +571,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Projeto/Semantico/analisadorSemantico.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="735">
-          <caret line="220" column="4" selection-start-line="220" selection-start-column="4" selection-end-line="220" selection-end-column="4" />
+        <state relative-caret-position="810">
+          <caret line="255" lean-forward="true" selection-start-line="255" selection-end-line="255" />
         </state>
       </provider>
     </entry>
