@@ -177,6 +177,7 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
     elif t == 18:
         #ATENÇÃO: coloquei esse global porquê o compilador brigou kkk se der problema tem que tirar
         global contadorTemporarias
+        print("Gerada variável temporária T"+str(contadorTemporarias))
 
         # LD -> OPRD1 opm OPRD2;
         OPRD1 = tokensParaValidacao.pop()
@@ -208,4 +209,15 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
             Tupla['coluna'] = id['coluna']
         else:
             print("Erro: Variável não declarada!")
+    elif t == 21:
+        num = tokensParaValidacao.pop()
+
+        Tupla['token'] = num['token']
+        Tupla['tipo'] = num['tipo']
+        Tupla['linha'] = num['linha']
+        Tupla['coluna'] = num['coluna']
+    elif t == 23:
+        TextoArquivo.append("}")
+    
+
     return Tupla

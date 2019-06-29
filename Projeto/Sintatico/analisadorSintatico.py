@@ -177,7 +177,7 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
                     tokensParaValidacao.append(pilha_semantica.pop())
 
             # SEMANTICO  ****** Acho que aqui temos que aplicar a regra.
-            analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos)
+            nTerminal = analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos)
 
             # faça t ser o topo da pilha
             t = pilha[len(pilha) - 1]
@@ -190,7 +190,7 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
                 pilha.append(valor)
 
                 # SEMANTICO  ****** Acho que aqui temos que empilhar o não terminal!
-
+                pilha_semantica.append(nTerminal)
 
             # imprima a producao A->B
             print("Regra aplicada: " + A +" -> " + B + RESET)
