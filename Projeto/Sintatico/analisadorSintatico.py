@@ -174,10 +174,12 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
                     pilha.pop()
                     # SEMANTICO  ****** Desempilhar os tokens também.
                     # Esses N tokens são os que formam a regra e os que você vai usar na validação semântica.
-                    tokensParaValidacao.append(pilha_semantica.pop())
+                    desempilha_semantica = pilha_semantica.pop()
+                    print("Desempilhou: "+ str(desempilha_semantica['token']))
+                    tokensParaValidacao.append(desempilha_semantica)
 
             # SEMANTICO  ****** Acho que aqui temos que aplicar a regra.
-            nTerminal = analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos)
+            nTerminal = analisadorSemantico(int(t)-1, A, tokensParaValidacao, TabelaSimbolos)
 
             # faça t ser o topo da pilha
             t = pilha[len(pilha) - 1]
