@@ -14,6 +14,7 @@ TextoArquivo = []
 TextoVariaveisTemporarias = []
 
 #contador para as variáveis temporárias
+
 contadorTemporarias = 0
 
 # Função que atribui tipo para tokens especificados na descrição do trabalho(n 2 pagina 3)
@@ -36,22 +37,22 @@ def imprimirArquivo(nomeArquivoDestino):
     arqDestino = open(str(nomeArquivoDestino)+".c", "w+")
 
     #imprimindo cabeçalho
-    arqDestino.write("#include<stdio.h>")
-    arqDestino.write("typedef char literal[256];")
-    arqDestino.write("void main(void){")
+    arqDestino.write("#include<stdio.h>\n")
+    arqDestino.write("typedef char literal[256];\n")
+    arqDestino.write("void main(void){\n")
 
     #imprimindo variáveis temporárias
-    arqDestino.write("\t/*----Variaveis temporarias----*/")
+    arqDestino.write("\t/*----Variaveis temporarias----*/\n")
     for texto in TextoVariaveisTemporarias:
-        arqDestino.write("\t"+str(texto))
-    arqDestino.write("\t/*------------------------------*/")
+        arqDestino.write("\t"+str(texto)+"\n")
+    arqDestino.write("\t/*------------------------------*/\n")
 
     #imprimindo corpo do texto
     for texto in TextoArquivo:
-        arqDestino.write("\t"+str(texto))
+        arqDestino.write("\t"+str(texto)+"\n")
 
     #fim do arquivo
-    arqDestino.write("}")
+    arqDestino.write("}\n")
 
     arqDestino.close()
     return

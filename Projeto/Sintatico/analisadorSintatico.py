@@ -179,7 +179,7 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
                     tokensParaValidacao.append(desempilha_semantica)
 
             # SEMANTICO  ****** Acho que aqui temos que aplicar a regra.
-            nTerminal = analisadorSemantico(int(t)-1, A, tokensParaValidacao, TabelaSimbolos)
+            nTerminal = analisadorSemantico(int(t), A, tokensParaValidacao, TabelaSimbolos)
 
             # faça t ser o topo da pilha
             t = pilha[len(pilha) - 1]
