@@ -13,6 +13,9 @@
 TextoArquivo = []
 TextoVariaveisTemporarias = []
 
+#contador para as variáveis temporárias
+contadorTemporarias = 0
+
 # Função que atribui tipo para tokens especificados na descrição do trabalho(n 2 pagina 3)
 def atribuiTipo(tokenTupla):
     if tokenTupla['token'] == 'OPM':
@@ -92,6 +95,9 @@ def naoTerminal(t):
 def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
     Tupla = {"lexema": naoTerminal(t), "token": naoTerminal(t), "tipo": "", "linha": "", "coluna": ""}
 
+    #para testes:
+    print("Não-Terminal da regra: " + Tupla['lexema'])
+
     if t == 5:
         TextoArquivo.append("\n\n\n")
     elif t == 6:
@@ -137,4 +143,69 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
         Tupla['tipo'] = literal['tipo']
         Tupla['linha'] = literal['linha']
         Tupla['coluna'] = literal['coluna']
+    elif t == 14:
+        num = tokensParaValidacao.pop()
+        Tupla['token'] = num['token']
+        Tupla['tipo'] = num['tipo']
+        Tupla['linha'] = num['linha']
+        Tupla['coluna'] = num['coluna']
+    elif t == 15:
+        id = tokensParaValidacao.pop()
+
+        #verificar se o identificador foi declarado
+        if id['tipo']:
+            Tupla['token'] = id['token']
+            Tupla['tipo'] = id['tipo']
+            Tupla['linha'] = id['linha']
+            Tupla['coluna'] = id['coluna']
+        else:
+            print("Erro: Variável não declarada!")
+    elif t == 17:
+        #CMD -> id rcb LD;
+        id = tokensParaValidacao.pop()
+        rcb = tokensParaValidacao.pop()
+        LD = tokensParaValidacao.pop()
+
+        # verificar se o identificador foi declarado
+        if id['tipo']:
+            if id['tipo'] == LD['tipo']:
+                TextoArquivo.append(id['lexema'] + " " + rcb['tipo'] + " " + LD['lexema'] + ";")
+            else:
+                print("Erro: Tipos diferentes para atribuição.")
+        else:
+            print("Erro: Variável não declarada!")
+    elif t == 18:
+        #ATENÇÃO: coloquei esse global porquê o compilador brigou kkk se der problema tem que tirar
+        global contadorTemporarias
+
+        # LD -> OPRD1 opm OPRD2;
+        OPRD1 = tokensParaValidacao.pop()
+        opm = tokensParaValidacao.pop()
+        OPRD2 = tokensParaValidacao.pop()
+
+        if OPRD1['tipo'] == OPRD2['tipo'] and OPRD1['tipo'] != "literal":
+            #gerar uma variável temporária Tx
+            TextoVariaveisTemporarias.append(str(OPRD2['tipo'])+" T"+ str(contadorTemporarias) +";")
+            Tupla['lexema'] = "T"+str(contadorTemporarias)
+            TextoArquivo.append("T"+ str(contadorTemporarias) + " = " + OPRD1['lexema'] + opm['tipo'] + OPRD2['lexema'] + ";")
+            contadorTemporarias += 1
+        else:
+            print("Erro: Operandos com tipos incompatíveis.")
+    elif t == 19:
+        OPRD = tokensParaValidacao.pop()
+        Tupla['token'] = OPRD['token']
+        Tupla['tipo'] = OPRD['tipo']
+        Tupla['linha'] = OPRD['linha']
+        Tupla['coluna'] = OPRD['coluna']
+    elif t == 20:
+        id = tokensParaValidacao.pop()
+
+        #verificar se o identificador está declarado
+        if id['tipo']:
+            Tupla['token'] = id['token']
+            Tupla['tipo'] = id['tipo']
+            Tupla['linha'] = id['linha']
+            Tupla['coluna'] = id['coluna']
+        else:
+            print("Erro: Variável não declarada!")
     return Tupla
