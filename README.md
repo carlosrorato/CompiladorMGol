@@ -11,25 +11,25 @@ O projeto é desenvolvido utilizando a IDE Pycharm, portanto, existem arquivos p
 .
 ├── Projeto
 │   ├── Lexico
-│	│   ├── analisadorLexico.py
-│	│   ├── tabelaSimbolos.py
-│	│   └── tabelaTransicao.py
+│   │   ├── analisadorLexico.py
+│   │   ├── tabelaSimbolos.py
+│   │   └── tabelaTransicao.py
 │   ├── Semantico
-│	│   └── analisadorSemantico.py
+│   │   └── analisadorSemantico.py
 │   ├── Sintatico
-│	│   ├── analisadorSintatico.py
-│	│   ├── preencheTabelas.py
-│	│   ├── Tabela Sintática - Não- Terminais.csv
-│	│   ├── Tabela Sintática - Pânico.csv
-│	│   ├── Tabela Sintática - qtd_SimbolosB.csv
-│	│   └── Tabela Sintática - Terminais.csv
+│   │   ├── analisadorSintatico.py
+│   │   ├── preencheTabelas.py
+│   │   ├── Tabela Sintática - Não- Terminais.csv
+│   │   ├── Tabela Sintática - Pânico.csv
+│   │   ├── Tabela Sintática - qtd_SimbolosB.csv
+│   │   └── Tabela Sintática - Terminais.csv
 │   ├── fonte.alg
 │   ├── main.py
 │   ├── programa.c
 │   └── teste.mgol
 ├── LICENCE
-├── LR0.png - autômato utilizado para a geração do analisador sintático
-├── DFA_Mgol.pdf - DFA utilizado para a geração do analisador léxico
+├── LR0.png
+├── DFA_Mgol.pdf
 └── README.md
 ```
 * O código principal é ```main.py```
