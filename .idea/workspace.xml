@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="44ea3100-a3b0-40f9-a462-e6a8c1b77a48" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Projeto/Semantico/analisadorSemantico.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/Semantico/analisadorSemantico.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projeto/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,17 +16,17 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Projeto/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="610">
-              <caret line="31" column="46" selection-start-line="31" selection-start-column="46" selection-end-line="31" selection-end-column="46" />
+            <state relative-caret-position="700">
+              <caret line="34" column="93" selection-start-line="34" selection-start-column="93" selection-end-line="34" selection-end-column="93" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="analisadorSintatico.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="analisadorSintatico.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Projeto/Sintatico/analisadorSintatico.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="192" column="49" lean-forward="true" selection-start-line="192" selection-start-column="49" selection-end-line="192" selection-end-column="49" />
+            <state relative-caret-position="121">
+              <caret line="292" column="13" selection-start-line="292" selection-start-column="13" selection-end-line="292" selection-end-column="13" />
               <folding>
                 <element signature="e#342#379#0" expanded="true" />
               </folding>
@@ -34,11 +34,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="analisadorSemantico.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="analisadorSemantico.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Projeto/Semantico/analisadorSemantico.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="810">
-              <caret line="255" lean-forward="true" selection-start-line="255" selection-end-line="255" />
+            <state relative-caret-position="5060">
+              <caret line="229" column="41" lean-forward="true" selection-start-line="229" selection-start-column="41" selection-end-line="229" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -92,9 +92,9 @@
         <option value="$PROJECT_DIR$/Projeto/teste.mgol" />
         <option value="$PROJECT_DIR$/Projeto/Lexico/tabelaSimbolos.py" />
         <option value="$PROJECT_DIR$/Projeto/Lexico/analisadorLexico.py" />
-        <option value="$PROJECT_DIR$/Projeto/main.py" />
         <option value="$PROJECT_DIR$/Projeto/Sintatico/analisadorSintatico.py" />
         <option value="$PROJECT_DIR$/Projeto/Semantico/analisadorSemantico.py" />
+        <option value="$PROJECT_DIR$/Projeto/main.py" />
       </list>
     </option>
   </component>
@@ -538,13 +538,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Projeto/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="610">
-          <caret line="31" column="46" selection-start-line="31" selection-start-column="46" selection-end-line="31" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Projeto/Lexico/analisadorLexico.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="900">
@@ -559,20 +552,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Projeto/Sintatico/analisadorSintatico.py">
+    <entry file="file://$PROJECT_DIR$/Projeto/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="192" column="49" lean-forward="true" selection-start-line="192" selection-start-column="49" selection-end-line="192" selection-end-column="49" />
-          <folding>
-            <element signature="e#342#379#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="700">
+          <caret line="34" column="93" selection-start-line="34" selection-start-column="93" selection-end-line="34" selection-end-column="93" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Projeto/Semantico/analisadorSemantico.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="810">
-          <caret line="255" lean-forward="true" selection-start-line="255" selection-end-line="255" />
+        <state relative-caret-position="5060">
+          <caret line="229" column="41" lean-forward="true" selection-start-line="229" selection-start-column="41" selection-end-line="229" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Projeto/Sintatico/analisadorSintatico.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="292" column="13" selection-start-line="292" selection-start-column="13" selection-end-line="292" selection-end-column="13" />
+          <folding>
+            <element signature="e#342#379#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

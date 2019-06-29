@@ -32,7 +32,6 @@ argumentos = sys.argv
 arqFonte = open("fonte.alg", encoding="utf-8")
 
 # Chama o Analisador Sintático
-analisadorSintatico(tabelaAcoes,tabelaDesvios,tabelaQtdSimbolos, tabelaErros, arqFonte, arqDestino)
+analisadorSintatico(tabelaAcoes,tabelaDesvios,tabelaQtdSimbolos, tabelaErros, arqFonte, "prog")
 
-arqDestino.close()
 arqFonte.close()

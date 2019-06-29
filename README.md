@@ -10,13 +10,26 @@ O projeto é desenvolvido utilizando a IDE Pycharm, portanto, existem arquivos p
 ```bash
 .
 ├── Projeto
-│   ├── pastas próprias do Projeto Pycharm
-│   ├── analisadorLexico.py
+│   ├── Lexico
+│	│   ├── analisadorLexico.py
+│	│   ├── tabelaSimbolos.py
+│	│   └── tabelaTransicao.py
+│   ├── Semantico
+│	│   └── analisadorSemantico.py
+│   ├── Sintatico
+│	│   ├── analisadorSintatico.py
+│	│   ├── preencheTabelas.py
+│	│   ├── Tabela Sintática - Não- Terminais.csv
+│	│   ├── Tabela Sintática - Pânico.csv
+│	│   ├── Tabela Sintática - qtd_SimbolosB.csv
+│	│   └── Tabela Sintática - Terminais.csv
+│   ├── fonte.alg
 │   ├── main.py
-│   ├── tabelaSimbolos.py
-│   ├── tabelaTransicao.py
+│   ├── programa.c
 │   └── teste.mgol
 ├── LICENCE
+├── LR0.png - autômato utilizado para a geração do analisador sintático
+├── DFA_Mgol.pdf - DFA utilizado para a geração do analisador léxico
 └── README.md
 ```
 * O código principal é ```main.py```
