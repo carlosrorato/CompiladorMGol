@@ -22,10 +22,10 @@ TextoArquivo = []
 TextoVariaveisTemporarias = []
 
 #contador para as variáveis temporárias
-
 contadorTemporarias = 0
 
-
+#flag para avaliar erro semântico
+flagErro = False
 
 # Função que atribui tipo para tokens especificados na descrição do trabalho(n 2 pagina 3)
 def atribuiTipo(tokenTupla):
@@ -44,6 +44,17 @@ def atribuiTipo(tokenTupla):
     return tokenTupla
 
 def imprimirArquivo(nomeArquivoDestino):
+
+    global flagErro
+    print(BOLD + "----------------------------------------------------------------")
+    # Houve erros semânticos
+    if flagErro:
+        print("Análise Semântica finalizada: " + RESET + "foram encontrados erros. " + RED + "Falha!")
+    # Análise finalizada sem erros
+    else:
+        print("Análise Semântica finalizada: " + GREEN + "aceitou!")
+    print(RESET + BOLD + "----------------------------------------------------------------")    
+
     arqDestino = open(str(nomeArquivoDestino)+".c", "w+")
 
     #imprimindo cabeçalho
@@ -81,11 +92,13 @@ def imprimirArquivo(nomeArquivoDestino):
     return
 
 def imprimirTerminal(textoImpressao):
-    print("\n----------------------- SEMÂNTICO -----------------------")
+    print(BOLD + "\n-----------------------" + " SEMÂNTICO " + "-----------------------")
     print(textoImpressao)
-    print("---------------------------------------------------------\n")
+    print(BOLD + "---------------------------------------------------------\n" + RESET)
 
 def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
+    global flagErro
+    global contadorTemporarias
     Tupla = {"lexema": str(A), "token": str(A), "tipo": "", "linha": "", "coluna": ""}
 
     #para testes:
@@ -94,7 +107,7 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
     if t == 5:
         textoImpressao = "\n\n\n"
         TextoArquivo.append(textoImpressao)
-        imprimirTerminal("Impresso no arquivo: " + textoImpressao)
+        imprimirTerminal("Impresso no arquivo: " + CYAN + textoImpressao + RESET)
     elif t == 6:
         #D -> id TIPO;
         id = tokensParaValidacao.pop()
@@ -105,7 +118,7 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
         #id['tipo'] = TIPO['tipo']
         textoImpressao = TIPO['tipo'] + " " + id['lexema'] + ";"
         TextoArquivo.append(TIPO['tipo'] + " " + id['lexema'] + ";")
-        imprimirTerminal("Impresso no arquivo: " + textoImpressao)
+        imprimirTerminal("Impresso no arquivo: " + CYAN + textoImpressao + RESET)
     elif t == 7:
         inteiro = tokensParaValidacao.pop()
         Tupla['tipo'] = inteiro['tipo']
@@ -124,17 +137,18 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
         if id['tipo'] == "literal":
             textoImpressao = "scanf(“%s”, " + id['lexema'] + ");"
             TextoArquivo.append(textoImpressao)
-            textoImpressao = "Impresso no arquivo: " + textoImpressao
+            textoImpressao = "Impresso no arquivo: " + CYAN + textoImpressao + RESET
         elif id['tipo'] == "inteiro":
             textoImpressao = "scanf(“%d”, &" + id['lexema'] + ");"
             TextoArquivo.append(textoImpressao)
-            textoImpressao = "Impresso no arquivo: " + textoImpressao
+            textoImpressao = "Impresso no arquivo: " + CYAN + textoImpressao + RESET
         elif id['tipo'] == "real":
             textoImpressao = "scanf(“%lf”, &" + id['lexema'] + ");"
             TextoArquivo.append(textoImpressao)
-            textoImpressao = "Impresso no arquivo: " + textoImpressao
+            textoImpressao = "Impresso no arquivo: " + CYAN + textoImpressao + RESET
         else:
-            textoImpressao = "Erro: Variável não declarada!"
+            textoImpressao = RED + "Erro Semântico: " + RESET + BOLD + "Variável não declarada!"
+            flagErro = True
         imprimirTerminal(textoImpressao)
             
     elif t == 12:
@@ -147,7 +161,7 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
         else: 
             textoImpressao = "printf(\""+arg['lexema']+"\");"
             TextoArquivo.append(textoImpressao)
-        imprimirTerminal("Impresso no arquivo: " + textoImpressao)
+        imprimirTerminal("Impresso no arquivo: " + CYAN + textoImpressao + RESET)
     elif t == 13:
         literal = tokensParaValidacao.pop()
         Tupla['token'] = literal['token']
@@ -173,7 +187,8 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
             Tupla['coluna'] = id['coluna']
             Tupla['lexema'] = id['lexema']
         else:
-            imprimirTerminal("Erro: Variável não declarada!")
+            imprimirTerminal(RED + "Erro Semântico: " + RESET + BOLD + "Variável não declarada!")
+            flagErro = True
     elif t == 17:
         #CMD -> id rcb LD;
         id = tokensParaValidacao.pop()
@@ -185,17 +200,19 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
             if id['tipo'] == LD['tipo']:
                 textoImpressao = id['lexema'] + " " + rcb['tipo'] + " " + LD['lexema'] + ";"
                 TextoArquivo.append(textoImpressao)
-                textoImpressao = "Impresso no arquivo: " + textoImpressao
+                textoImpressao = "Impresso no arquivo: " + CYAN + textoImpressao + RESET
             else:
-                textoImpressao = "Erro: Tipos diferentes para atribuição."
+                textoImpressao = RED + "Erro Semântico: " + RESET + BOLD + "Tipos diferentes para atribuição."
+                flagErro = True
                 imprimirTerminal(textoImpressao)
         else:
-            textoImpressao = "Erro: Variável não declarada!"
+            textoImpressao = RED + "Erro Semântico: " + RESET + BOLD + "Variável não declarada!"
+            flagErro = True 
         imprimirTerminal(textoImpressao)
     elif t == 18:
         #ATENÇÃO: coloquei esse global porquê o compilador brigou kkk se der problema tem que tirar
-        global contadorTemporarias
-        imprimirTerminal("Gerada variável temporária T"+str(contadorTemporarias))
+        contadorTemporarias
+        imprimirTerminal("Gerada variável temporária: " + GREEN + "T"+str(contadorTemporarias) + RESET)
 
         # LD -> OPRD1 opm OPRD2;
         OPRD1 = tokensParaValidacao.pop()
@@ -216,10 +233,11 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
                 Tupla["tipo"] = "real"
             textoImpressao = "T"+ str(contadorTemporarias) + " = " + OPRD1['lexema'] + " " + opm['tipo'] + " " + OPRD2['lexema'] + ";"
             TextoArquivo.append(textoImpressao)
-            textoImpressao = "Impresso no arquivo: " + textoImpressao
+            textoImpressao = "Impresso no arquivo: " + CYAN + textoImpressao + RESET
             contadorTemporarias += 1
         else:
-            textoImpressao = "Erro: Operandos com tipos incompatíveis."
+            textoImpressao = RED + "Erro Semântico: " + RESET + BOLD + "Operandos com tipos incompatíveis."
+            flagErro = True 
         imprimirTerminal(textoImpressao)
     elif t == 19:
         OPRD = tokensParaValidacao.pop()
@@ -239,7 +257,8 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
             Tupla['coluna'] = id['coluna']
             Tupla['lexema'] = id['lexema']
         else:
-            imprimirTerminal("Erro: Variável não declarada!")
+            imprimirTerminal(RED + "Erro Semântico: " + RESET + BOLD + "Variável não declarada!")
+            flagErro = True
     elif t == 21:
         num = tokensParaValidacao.pop()
 
@@ -251,7 +270,7 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
     elif t == 23:
         textoImpressao = "}"
         TextoArquivo.append(textoImpressao)
-        imprimirTerminal("Impresso no arquivo: " + textoImpressao)
+        imprimirTerminal("Impresso no arquivo: " + CYAN + textoImpressao + RESET)
     elif t == 24:
         #CABEÇALHO -> se (EXPR) então
         #desempilhar três símbolos para chegar no EXPR
@@ -261,7 +280,7 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
 
         textoImpressao = "if ("+ EXP_R['lexema']+"){"
         TextoArquivo.append(textoImpressao)
-        imprimirTerminal("Impresso no arquivo: " + textoImpressao)
+        imprimirTerminal("Impresso no arquivo: " + CYAN + textoImpressao + RESET)
     elif t == 25:
         # ATENÇÃO: coloquei esse global porquê o compilador brigou kkk se der problema tem que tirar
         # global contadorTemporarias
@@ -286,17 +305,18 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
                 Tupla["tipo"] = "real"
             textoImpressao = "T" + str(contadorTemporarias) + " = " + OPRD1['lexema'] + " " + opr['tipo'] + " " + OPRD2['lexema'] + ";"
             TextoArquivo.append(textoImpressao)
-            textoImpressao = "Impresso no arquivo: " + textoImpressao
+            textoImpressao = "Impresso no arquivo: " + CYAN + textoImpressao + RESET
             contadorTemporarias += 1
         else:
-            textoImpressao = "Erro: Operandos com tipos incompatíveis."
+            textoImpressao = RED + "Erro Semântico: " + RESET + BOLD + "Operandos com tipos incompatíveis."
+            flagErro = True 
         imprimirTerminal(textoImpressao)
 
     #regras para o enquanto
     elif t == 31:
         textoImpressao = "}"
         TextoArquivo.append(textoImpressao)
-        imprimirTerminal("Impresso no arquivo: " + textoImpressao)
+        imprimirTerminal("Impresso no arquivo: " + CYAN + textoImpressao + RESET)
     elif t == 32:
         #TESTE -> enquanto (EXP_R) faça
         #desempilhar três símbolos para chegar no EXPR
@@ -305,6 +325,6 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
         EXP_R = tokensParaValidacao.pop()
         textoImpressao = "while ("+ EXP_R['lexema']+"){"
         TextoArquivo.append(textoImpressao)
-        imprimirTerminal("Impresso no arquivo: " + textoImpressao)
+        imprimirTerminal("Impresso no arquivo: " + CYAN + textoImpressao + RESET)
     # As próximas regras não possuem regras semânticas
     return Tupla

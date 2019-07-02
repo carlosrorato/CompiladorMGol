@@ -3,6 +3,6 @@ inicio
         B inteiro;
     varfim;
     
-    B <- B -  1;
+    B <- C -  1;
 
 fim

@@ -209,17 +209,19 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
             # Houve recuperação de erros
             if flagErro:
                 print("Análise Sintática finalizada: " + RESET + "foram encontrados erros. " + RED + "Falha!")
-            
+                print(RESET + "----------------------------------------------------------------")                
+
             # Análise finalizada sem erros
             else:
                 print("Análise Sintática finalizada: " + GREEN + "aceitou!")
+                print(RESET + "----------------------------------------------------------------")                
 
                 #SEMÂNTICO - FAZ O ARQUIVO .C
                 imprimirArquivo(nomeArquivoDestino)
 
             # Questões estéticas
             #print(RESET + BOLD + "----------------------------------------------------------------")    
-            print(RESET + "----------------------------------------------------------------")                
+            #print(RESET + "----------------------------------------------------------------")                
             # Finaliza a execução do Sintático
             return
 
