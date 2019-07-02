@@ -171,7 +171,12 @@ def analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos):
             palavra = palavra + char
             distanciaUltimoAceito = 1
             token = verifica_token_dfa(estado)
-            tupla = {"lexema": palavra, "token": token, "tipo": "null", "linha": str(dadosErro["linha"]),"coluna": str(dadosErro["colAtual"])}
+            if(estado == 1):
+                tupla = {"lexema": palavra, "token": token, "tipo": "int", "linha": str(dadosErro["linha"]),"coluna": str(dadosErro["colAtual"])}
+            elif(estado == 3 or estado == 6):
+                tupla = {"lexema": palavra, "token": token, "tipo": "real", "linha": str(dadosErro["linha"]),"coluna": str(dadosErro["colAtual"])}
+            else:
+                tupla = {"lexema": palavra, "token": token, "tipo": "null", "linha": str(dadosErro["linha"]),"coluna": str(dadosErro["colAtual"])}
 
         # Caso exista transição e o novo estado não é atual, adiciona o caracter lido na palavra.
         # Caso o caracter seja espaço, \n ou \t, nada é feito para que sejam reconhecidos e ignorados 

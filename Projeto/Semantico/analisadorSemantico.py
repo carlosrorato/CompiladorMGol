@@ -17,6 +17,8 @@ TextoVariaveisTemporarias = []
 
 contadorTemporarias = 0
 
+
+
 # Função que atribui tipo para tokens especificados na descrição do trabalho(n 2 pagina 3)
 def atribuiTipo(tokenTupla):
     if tokenTupla['token'] == 'OPM':
@@ -37,8 +39,9 @@ def imprimirArquivo(nomeArquivoDestino):
     arqDestino = open(str(nomeArquivoDestino)+".c", "w+")
 
     #imprimindo cabeçalho
-    arqDestino.write("#include<stdio.h>\n")
+    arqDestino.write("#include<stdio.h>\n\n")
     arqDestino.write("typedef char literal[256];\n")
+    arqDestino.write("typedef double real;\n\n")
     arqDestino.write("void main(void){\n")
 
     #imprimindo variáveis temporárias
@@ -47,9 +50,21 @@ def imprimirArquivo(nomeArquivoDestino):
         arqDestino.write("\t"+str(texto)+"\n")
     arqDestino.write("\t/*------------------------------*/\n")
 
+    #contador para identar o código de acordo com o escopo
+    contadorIdentacao = 1
+
     #imprimindo corpo do texto
     for texto in TextoArquivo:
-        arqDestino.write("\t"+str(texto)+"\n")
+
+        if "}" in texto:
+            contadorIdentacao -= 1
+            
+        for i in range(0, contadorIdentacao):
+            arqDestino.write("\t")
+        arqDestino.write(str(texto)+"\n")
+
+        if "{" in texto:
+            contadorIdentacao += 1
 
     #fim do arquivo
     arqDestino.write("}\n")
@@ -101,19 +116,24 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
         # desempilhar dois símbolos, para chegar no arg
         arg = tokensParaValidacao.pop()
         arg = tokensParaValidacao.pop()
-        TextoArquivo.append("printf(\""+arg['lexema']+"\");")
+        if arg['token'] == 'Literal':
+            TextoArquivo.append("printf("+ arg['lexema']+");")
+        else: 
+            TextoArquivo.append("printf(\""+arg['lexema']+"\");")
     elif t == 13:
         literal = tokensParaValidacao.pop()
         Tupla['token'] = literal['token']
         Tupla['tipo'] = literal['tipo']
         Tupla['linha'] = literal['linha']
         Tupla['coluna'] = literal['coluna']
+        Tupla['lexema'] = literal['lexema']
     elif t == 14:
         num = tokensParaValidacao.pop()
         Tupla['token'] = num['token']
         Tupla['tipo'] = num['tipo']
         Tupla['linha'] = num['linha']
         Tupla['coluna'] = num['coluna']
+        Tupla['lexema'] = num['lexema']
     elif t == 15:
         id = tokensParaValidacao.pop()
 
@@ -123,6 +143,7 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
             Tupla['tipo'] = id['tipo']
             Tupla['linha'] = id['linha']
             Tupla['coluna'] = id['coluna']
+            Tupla['lexema'] = id['lexema']
         else:
             print("Erro: Variável não declarada!")
     elif t == 17:
@@ -153,7 +174,7 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
         tipo2 = OPRD2['tipo']
 
         #tipos iguais ou equivalentes
-        if (tipo1 == tipo2 or (tipo1 == 'real' and tipo2 == 'inteiro') or (tipo1 == 'inteiro' and tipo2 == 'real')) and tipo1 != "literal":
+        if (tipo1 == tipo2 or (tipo1 == 'real' and tipo2 == 'int') or (tipo1 == 'int' and tipo2 == 'real')) and tipo1 != "literal":
             #gerar uma variável temporária Tx
             TextoVariaveisTemporarias.append(str(OPRD2['tipo'])+" T"+ str(contadorTemporarias) +";")
             Tupla['lexema'] = "T"+str(contadorTemporarias)
@@ -167,6 +188,7 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
         Tupla['tipo'] = OPRD['tipo']
         Tupla['linha'] = OPRD['linha']
         Tupla['coluna'] = OPRD['coluna']
+        Tupla['lexema'] = OPRD['lexema']
     elif t == 20:
         id = tokensParaValidacao.pop()
 
@@ -176,6 +198,7 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
             Tupla['tipo'] = id['tipo']
             Tupla['linha'] = id['linha']
             Tupla['coluna'] = id['coluna']
+            Tupla['lexema'] = id['lexema']
         else:
             print("Erro: Variável não declarada!")
     elif t == 21:
@@ -185,7 +208,9 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
         Tupla['tipo'] = num['tipo']
         Tupla['linha'] = num['linha']
         Tupla['coluna'] = num['coluna']
+        Tupla['lexema'] = num['lexema']
     elif t == 23:
+        
         TextoArquivo.append("}")
     elif t == 24:
         #CABEÇALHO -> se (EXPR) então
@@ -209,7 +234,7 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
         tipo2 = OPRD2['tipo']
 
         # tipos iguais ou equivalentes
-        if tipo1 == tipo2 or (tipo1 == 'real' and tipo2 == 'inteiro') or (tipo1 == 'inteiro' and tipo2 == 'real'):
+        if tipo1 == tipo2 or (tipo1 == 'real' and tipo2 == 'int') or (tipo1 == 'int' and tipo2 == 'real'):
             # gerar uma variável temporária Tx
             TextoVariaveisTemporarias.append(str(OPRD2['tipo']) + " T" + str(contadorTemporarias) + ";")
             Tupla['lexema'] = "T" + str(contadorTemporarias)
