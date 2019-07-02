@@ -55,8 +55,9 @@ def traduzToken(token):
     else:
         return token
 
-# SEMANTICO  ****** a função agora recebe também o arquivoDestino, o arquivo .c
-#Função principal do Analisador Sintático
+# ********************* SEMANTICO  *********************
+#  a função agora recebe também o arquivoDestino, o arquivo .c
+# Função principal do Analisador Sintático
 def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErros, arquivo, nomeArquivoDestino):
 
     # Criação e preenchimento da tabela de transições do DFA
@@ -69,13 +70,15 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
     # Lista para simular pilha
     pilha = []
 
-    # SEMANTICO  ****** Lista para a pilha auxiliar
+    # ********************* SEMANTICO  ********************* 
+    # Lista para a pilha auxiliar
     pilha_semantica = []
 
     # Empilha estado inicial
     pilha.append(0)
 
-    # SEMANTICO  ****** Empilha uma "tupla inicial"
+    # ********************* SEMANTICO  *********************
+    # Empilha uma "tupla inicial"
     pilha_semantica.append({"lexema": "null", "token": "", "tipo": "null", "linha": "","coluna": ""})
 
     # Implementacao do algoritmo - conforme descrito no livro
@@ -130,10 +133,11 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
         # IF ACTION(s,a) = shift t
         if t and operacao == "S":
 
-            # empilha t na pilha
+            # Empilha t na pilha
             pilha.append(t)
 
-            # SEMANTICO  ****** Empilha o token
+            # ********************* SEMANTICO  *********************
+            # Empilha o token
             pilha_semantica.append(b)
 
             # seja "a" o prox simbolo da entrada: loop para evitar comentarios
@@ -147,7 +151,8 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
                 # Lê um novo token do Léxico
                 else:
                     b = analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos)
-                    # SEMANTICO atribuição de tipo
+                    # ********************* SEMANTICO  *********************
+                    # Atribuição de tipo
                     aux = atribuiTipo(b)
                     b = aux
                     a = b["token"]
@@ -165,20 +170,23 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
             A = tabelaQtdSimbolos[int(t) - 1].get("A")
             B = tabelaQtdSimbolos[int(t) - 1].get("Beta")
 
-            # SEMANTICO  ****** Estrutura para guardar os tokens desempilhados para a validação semântica
+            # # ********************* SEMANTICO  *********************
+            # Estrutura para guardar os tokens desempilhados para a validação semântica
             tokensParaValidacao = []
 
             # desempilha |B| símbolos da pilha
             if x:
                 for i in range(0, int(x)):
                     pilha.pop()
-                    # SEMANTICO  ****** Desempilhar os tokens também.
+                    # # ********************* SEMANTICO  *********************
+                    # Desempilhar os tokens também.
                     # Esses N tokens são os que formam a regra e os que você vai usar na validação semântica.
                     desempilha_semantica = pilha_semantica.pop()
-                    #print("Desempilhou: "+ str(desempilha_semantica['token']))
                     tokensParaValidacao.append(desempilha_semantica)
 
-            # SEMANTICO  ****** Acho que aqui temos que aplicar a regra.
+            # ********************* SEMANTICO  ********************* 
+            # Aplica a regra semântica de acordo com a produção reduzida, recebendo o 
+            # não terminal da esquerda, com as devidas modificações, para ser empilhado
             nTerminal = analisadorSemantico(int(t), A, tokensParaValidacao, TabelaSimbolos)
 
             # faça t ser o topo da pilha
@@ -191,7 +199,8 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
                 valor = tabelaDesvios[int(t)].get(A)
                 pilha.append(valor)
 
-                # SEMANTICO  ****** Acho que aqui temos que empilhar o não terminal!
+                # ********************* SEMANTICO  *********************
+                # Empilha o não terminal recebido do semântico
                 pilha_semantica.append(nTerminal)
 
             # imprima a producao A->B
@@ -216,7 +225,9 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
                 print("Análise Sintática finalizada: " + GREEN + "aceitou!")
                 print(RESET + "----------------------------------------------------------------")                
 
-                #SEMÂNTICO - FAZ O ARQUIVO .C
+                # ********************* SEMANTICO  *********************
+                # Gera o arquivo .c com o mesmo nome do arquivo mgol que está sendo analisado
+                # O arquivo só é gerado caso não haja erros léxicos, sintáticos ou semânticos
                 imprimirArquivo(nomeArquivoDestino)
 
             # Questões estéticas
@@ -322,7 +333,8 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
                 if x:
                     for i in range(0, int(x)):
                         pilha.pop()
-                        # SEMANTICO  ****** Desempilhar os tokens também.
+                        # ********************* SEMANTICO  *********************
+                        # Desempilha os tokens também
                         pilha_semantica.pop()
 
                 # Questões estéticas

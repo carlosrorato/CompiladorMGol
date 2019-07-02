@@ -171,6 +171,10 @@ def analisadorLexico(arquivo, TabelaTransicao, TabelaSimbolos):
             palavra = palavra + char
             distanciaUltimoAceito = 1
             token = verifica_token_dfa(estado)
+
+            # ********************* SEMANTICO  *********************
+            # Adiciona tipo para tokens do tipo num para facilitar as verificações do 
+            # semântico
             if(estado == 1):
                 tupla = {"lexema": palavra, "token": token, "tipo": "int", "linha": str(dadosErro["linha"]),"coluna": str(dadosErro["colAtual"])}
             elif(estado == 3 or estado == 6):
