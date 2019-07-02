@@ -147,7 +147,7 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
             TextoArquivo.append(textoImpressao)
             textoImpressao = "Impresso no arquivo: " + CYAN + textoImpressao + RESET
         else:
-            textoImpressao = RED + "Erro Semântico: " + RESET + BOLD + "Variável não declarada!"
+            textoImpressao = RED + "Erro Semântico: " + RESET + BOLD + "Variável não declarada!\n" + "Linha: " + RESET + id["linha"] + BOLD + " Coluna: " + RESET + id["coluna"] 
             flagErro = True
         imprimirTerminal(textoImpressao)
             
@@ -180,14 +180,14 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
         id = tokensParaValidacao.pop()
 
         #verificar se o identificador foi declarado
-        if id['tipo']:
+        if id['tipo'] != "null":
             Tupla['token'] = id['token']
             Tupla['tipo'] = id['tipo']
             Tupla['linha'] = id['linha']
             Tupla['coluna'] = id['coluna']
             Tupla['lexema'] = id['lexema']
         else:
-            imprimirTerminal(RED + "Erro Semântico: " + RESET + BOLD + "Variável não declarada!")
+            imprimirTerminal(RED + "Erro Semântico: " + RESET + BOLD + "Variável não declarada!\n" + "Linha: " + RESET + id["linha"] + BOLD + " Coluna: " + RESET + id["coluna"])
             flagErro = True
     elif t == 17:
         #CMD -> id rcb LD;
@@ -196,17 +196,17 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
         LD = tokensParaValidacao.pop()
 
         # verificar se o identificador foi declarado
-        if id['tipo']:
+        if id['tipo'] != "null":
             if id['tipo'] == LD['tipo']:
                 textoImpressao = id['lexema'] + " " + rcb['tipo'] + " " + LD['lexema'] + ";"
                 TextoArquivo.append(textoImpressao)
                 textoImpressao = "Impresso no arquivo: " + CYAN + textoImpressao + RESET
             else:
-                textoImpressao = RED + "Erro Semântico: " + RESET + BOLD + "Tipos diferentes para atribuição."
+                textoImpressao = RED + "Erro Semântico: " + RESET + BOLD + "Tipos diferentes para atribuição.\n" + "Linha: " + RESET + id["linha"] + BOLD + " Coluna: " + RESET + id["coluna"]
                 flagErro = True
                 imprimirTerminal(textoImpressao)
         else:
-            textoImpressao = RED + "Erro Semântico: " + RESET + BOLD + "Variável não declarada!"
+            textoImpressao = RED + "Erro Semântico: " + RESET + BOLD + "Variável não declarada!\n" + "Linha: " + RESET + id["linha"] + BOLD + " Coluna: " + RESET + id["coluna"]
             flagErro = True 
         imprimirTerminal(textoImpressao)
     elif t == 18:
@@ -236,7 +236,7 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
             textoImpressao = "Impresso no arquivo: " + CYAN + textoImpressao + RESET
             contadorTemporarias += 1
         else:
-            textoImpressao = RED + "Erro Semântico: " + RESET + BOLD + "Operandos com tipos incompatíveis."
+            textoImpressao = RED + "Erro Semântico: " + RESET + BOLD + "Operandos com tipos incompatíveis.\n" + "Linha: " + RESET + OPRD2["linha"] + BOLD + " Coluna: " + RESET + OPRD2["coluna"]
             flagErro = True 
         imprimirTerminal(textoImpressao)
     elif t == 19:
@@ -250,14 +250,14 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
         id = tokensParaValidacao.pop()
 
         #verificar se o identificador está declarado
-        if id['tipo']:
+        if id['tipo'] != "null":
             Tupla['token'] = id['token']
             Tupla['tipo'] = id['tipo']
             Tupla['linha'] = id['linha']
             Tupla['coluna'] = id['coluna']
             Tupla['lexema'] = id['lexema']
         else:
-            imprimirTerminal(RED + "Erro Semântico: " + RESET + BOLD + "Variável não declarada!")
+            imprimirTerminal(RED + "Erro Semântico: " + RESET + BOLD + "Variável não declarada!\n" + "Linha: " + RESET + id["linha"] + BOLD + " Coluna: " + RESET + id["coluna"])
             flagErro = True
     elif t == 21:
         num = tokensParaValidacao.pop()
@@ -308,7 +308,7 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
             textoImpressao = "Impresso no arquivo: " + CYAN + textoImpressao + RESET
             contadorTemporarias += 1
         else:
-            textoImpressao = RED + "Erro Semântico: " + RESET + BOLD + "Operandos com tipos incompatíveis."
+            textoImpressao = RED + "Erro Semântico: " + RESET + BOLD + "Operandos com tipos incompatíveis.\n" + "Linha: " + RESET + OPRD2["linha"] + BOLD + " Coluna: " + RESET + OPRD2["coluna"]
             flagErro = True 
         imprimirTerminal(textoImpressao)
 
