@@ -175,7 +175,7 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
                     # SEMANTICO  ****** Desempilhar os tokens também.
                     # Esses N tokens são os que formam a regra e os que você vai usar na validação semântica.
                     desempilha_semantica = pilha_semantica.pop()
-                    print("Desempilhou: "+ str(desempilha_semantica['token']))
+                    #print("Desempilhou: "+ str(desempilha_semantica['token']))
                     tokensParaValidacao.append(desempilha_semantica)
 
             # SEMANTICO  ****** Acho que aqui temos que aplicar a regra.
@@ -203,7 +203,8 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
 
             # Questões estéticas
             print()
-            print(BOLD + "----------------------------------------------------------------")
+            #print(BOLD + "----------------------------------------------------------------")
+            print("----------------------------------------------------------------")
 
             # Houve recuperação de erros
             if flagErro:
@@ -217,8 +218,8 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
                 imprimirArquivo(nomeArquivoDestino)
 
             # Questões estéticas
-            print(RESET + BOLD + "----------------------------------------------------------------")    
-            
+            #print(RESET + BOLD + "----------------------------------------------------------------")    
+            print(RESET + "----------------------------------------------------------------")                
             # Finaliza a execução do Sintático
             return
 
@@ -245,7 +246,8 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
             # Verificando a quantidade de simbolos no dicionario
             if len(simbolosFaltando) == 1:
                 # Se for apenas um símbolo, o insere na análise para continuá-la
-                print(BOLD + "\tTratamento de erro." + RESET + " Inserindo símbolo ausente...")
+                #print(BOLD + "\tTratamento de erro." + RESET + " Inserindo símbolo ausente...")
+                print("\tTratamento de erro." + RESET + " Inserindo símbolo ausente...")
                 chave = [key for key in simbolosFaltando.keys()]
 
                 # para armazenar o último token lido
@@ -258,14 +260,16 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
                 flagSimbolo = True 
 
                 # Questões estéticas
-                print("\t" + CYANDARK + BOLD + a + RESET + " inserido para prosseguir a análise.")
-                print(BOLD + "\tFim de tratamento de erro\n" + RESET)
-
+                # print("\t" + CYANDARK + BOLD + a + RESET + " inserido para prosseguir a análise.")
+                # print(BOLD + "\tFim de tratamento de erro\n" + RESET)
+                print("\t" + CYANDARK + a + RESET + " inserido para prosseguir a análise.")
+                print("\tFim de tratamento de erro\n" + RESET)
             # Mais de uma possibilidade de símbolos que poderiam ser inseridos para prosseguir a 
             # análise
             else:
                 # Questões estéticas
-                print(BOLD + "\t\tIniciando tratamento de erro." + RESET + " À procura de um token sincronizante...")
+                #print(BOLD + "\t\tIniciando tratamento de erro." + RESET + " À procura de um token sincronizante...")
+                print("\t\tIniciando tratamento de erro." + RESET + " À procura de um token sincronizante...")
                 
                 # Obtem a lista de símbolos do conjunto Follow do não terminal à esquerda da primeira
                 # regra do estado atual(topo da pilha) para resincronizar a análise
@@ -286,10 +290,13 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
 
                             # Questões estéticas
                             print("\t\tArquivo finalizado. Não foi possível concluir a recuperação...")
-                            print(BOLD + "\t\tFim de tratamento de erro\n")
-                            print(BOLD + "\n----------------------------------------------------------------")
+                            # print(BOLD + "\t\tFim de tratamento de erro\n")
+                            # print(BOLD + "\n----------------------------------------------------------------")
+                            print("\t\tFim de tratamento de erro\n")
+                            print("\n----------------------------------------------------------------")
                             print("Análise Sintática finalizada: " + RESET + "foram encontrados erros. " + RED + "Falha!")
-                            print(RESET + BOLD + "----------------------------------------------------------------")
+                            # print(RESET + BOLD + "----------------------------------------------------------------")
+                            print(RESET + "----------------------------------------------------------------")
                             return
 
                         # Aqui, ele deve prosseguir a analise, independente dos erros (que mesmo assim sao mostrados na tela)
@@ -305,8 +312,8 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
                             break
 
                 # Questões estéticas
-                print("\t\tEncontrado token sincronizante: " + CYANDARK + BOLD + a + RESET)
-
+                # print("\t\tEncontrado token sincronizante: " + CYANDARK + BOLD + a + RESET)
+                print("\t\tEncontrado token sincronizante: " + CYANDARK + a + RESET)
                 # Obtém a quantidade de símbolos empilhados relacionados à primeira regra do estado
                 # atual e desempilha-os para continuar a análise de forma correta
                 x = tabelaErros[int(s)].get('QtdSimbolos')
@@ -317,4 +324,5 @@ def analisadorSintatico(tabelaAcoes, tabelaDesvios, tabelaQtdSimbolos, tabelaErr
                         pilha_semantica.pop()
 
                 # Questões estéticas
-                print(BOLD + "\t\tRetomando análise sintática\n" + RESET)
+                # print(BOLD + "\t\tRetomando análise sintática\n" + RESET)
+                print("\t\tRetomando análise sintática\n" + RESET)
