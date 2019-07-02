@@ -244,5 +244,16 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
         else:
             print("Erro: Operandos com tipos incompatíveis.")
 
-        # As próximas regras não possuem regras semânticas
+    #regras para o enquanto
+    elif t == 31:
+        TextoArquivo.append("}")
+    elif t == 32:
+        #TESTE -> enquanto (EXP_R) faça
+        #desempilhar três símbolos para chegar no EXPR
+        EXP_R = tokensParaValidacao.pop()
+        EXP_R = tokensParaValidacao.pop()
+        EXP_R = tokensParaValidacao.pop()
+
+        TextoArquivo.append("while ("+ EXP_R['lexema']+"){")
+    # As próximas regras não possuem regras semânticas
     return Tupla
