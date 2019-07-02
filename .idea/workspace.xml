@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="44ea3100-a3b0-40f9-a462-e6a8c1b77a48" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Projeto/Semantico/analisadorSemantico.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/Semantico/analisadorSemantico.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Projeto/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Projeto/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -14,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Projeto/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="585">
-              <caret line="30" column="27" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
+            <state relative-caret-position="436">
+              <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
               <folding>
                 <element signature="e#325#335#0" expanded="true" />
               </folding>
@@ -38,7 +38,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="analisadorSemantico.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="analisadorSemantico.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Projeto/Semantico/analisadorSemantico.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="460">
@@ -59,7 +59,7 @@
       <file leaf-file-name="tabelaSimbolos.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Projeto/Lexico/tabelaSimbolos.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="625">
+            <state relative-caret-position="475">
               <caret line="25" column="87" selection-start-line="25" selection-start-column="86" selection-end-line="25" selection-end-column="87" />
             </state>
           </provider>
@@ -87,9 +87,9 @@
         <option value="$PROJECT_DIR$/Projeto/teste.mgol" />
         <option value="$PROJECT_DIR$/Projeto/Lexico/tabelaSimbolos.py" />
         <option value="$PROJECT_DIR$/Projeto/Lexico/analisadorLexico.py" />
-        <option value="$PROJECT_DIR$/Projeto/main.py" />
         <option value="$PROJECT_DIR$/Projeto/Sintatico/analisadorSintatico.py" />
         <option value="$PROJECT_DIR$/Projeto/Semantico/analisadorSemantico.py" />
+        <option value="$PROJECT_DIR$/Projeto/main.py" />
       </list>
     </option>
   </component>
@@ -269,7 +269,7 @@
       <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="3" />
       <window_info anchor="bottom" id="Python Console" order="0" />
-      <window_info anchor="bottom" id="Run" order="6" weight="0.13152401" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.28601253" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="1" weight="0.08053007" />
       <window_info id="Favorites" order="0" side_tool="true" />
@@ -550,27 +550,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Projeto/Semantico/analisadorSemantico.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="247" column="17" selection-start-line="247" selection-start-column="17" selection-end-line="247" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Projeto/Lexico/tabelaSimbolos.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="625">
+        <state relative-caret-position="475">
           <caret line="25" column="87" selection-start-line="25" selection-start-column="86" selection-end-line="25" selection-end-column="87" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Projeto/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="30" column="27" selection-start-line="30" selection-start-column="27" selection-end-line="30" selection-end-column="27" />
+        <state relative-caret-position="436">
+          <caret line="38" lean-forward="true" selection-start-line="38" selection-end-line="38" />
           <folding>
             <element signature="e#325#335#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Projeto/Semantico/analisadorSemantico.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="247" column="17" selection-start-line="247" selection-start-column="17" selection-end-line="247" selection-end-column="17" />
         </state>
       </provider>
     </entry>
