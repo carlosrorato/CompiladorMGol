@@ -135,15 +135,15 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
         id = tokensParaValidacao.pop()
 
         if id['tipo'] == "literal":
-            textoImpressao = "scanf(“%s”, " + id['lexema'] + ");"
+            textoImpressao = 'scanf("%s", ' + id['lexema'] + ");"
             TextoArquivo.append(textoImpressao)
             textoImpressao = "Impresso no arquivo: " + CYAN + textoImpressao + RESET
-        elif id['tipo'] == "inteiro":
-            textoImpressao = "scanf(“%d”, &" + id['lexema'] + ");"
+        elif id['tipo'] == "int":
+            textoImpressao = 'scanf("%d", &' + id['lexema'] + ");"
             TextoArquivo.append(textoImpressao)
             textoImpressao = "Impresso no arquivo: " + CYAN + textoImpressao + RESET
         elif id['tipo'] == "real":
-            textoImpressao = "scanf(“%lf”, &" + id['lexema'] + ");"
+            textoImpressao = 'scanf("%lf", &' + id['lexema'] + ");"
             TextoArquivo.append(textoImpressao)
             textoImpressao = "Impresso no arquivo: " + CYAN + textoImpressao + RESET
         else:
