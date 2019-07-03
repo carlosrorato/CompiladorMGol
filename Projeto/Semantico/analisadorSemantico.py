@@ -348,7 +348,7 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
     elif t == 25:
         
         # Gera variável temporária de acordo com o valor do contador
-        imprimirTerminal("Gerada variável temporária T" + str(contadorTemporarias))
+        imprimirTerminal("Gerada variável temporária: " + GREEN + "T"+str(contadorTemporarias) + RESET)
         OPRD1 = tokensParaValidacao.pop()
         opr = tokensParaValidacao.pop()
         OPRD2 = tokensParaValidacao.pop()

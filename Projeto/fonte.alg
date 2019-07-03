@@ -6,7 +6,7 @@ inicio
     C real;
   varfim;
   escreva "Digite B";
-  leia B;
+  leia E;
   escreva "Digite A:";
   leia A;
   se(B>2)
