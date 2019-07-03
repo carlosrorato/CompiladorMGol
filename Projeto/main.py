@@ -29,8 +29,8 @@ tabelaErros = preencheTabelaErros()
 
 # Abre o arquivo passado como argumento
 argumentos = sys.argv
-# arqFonte = open(argumentos[1], encoding="utf-8")
-arqFonte = open("fonte.alg", encoding="utf-8")
+arqFonte = open(argumentos[1], encoding="utf-8")
+# arqFonte = open("fonte.alg", encoding="utf-8")
 
 #separando o nome do arquivo passado como argumento em nome e extensao,
 #para gerar o arquivo .c com o mesmo nome do arquivo de entrada:

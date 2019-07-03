@@ -367,8 +367,12 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
                 Tupla["tipo"] = "real"
             textoImpressao = "T" + str(contadorTemporarias) + " = " + OPRD1['lexema'] + " " + opr['tipo'] + " " + OPRD2['lexema'] + ";"
             TextoArquivo.append(textoImpressao)
+
+            # Armazena o valor da EXP_R para permitir o teste da condição dentro do loop
+            Tupla['valorEXP'] = textoImpressao
             textoImpressao = "Impresso no arquivo: " + CYAN + textoImpressao + RESET
             contadorTemporarias += 1
+            
         else:
             textoImpressao = RED + "Erro Semântico: " + RESET + BOLD + "Operandos com tipos incompatíveis.\n" + "Linha: " + RESET + OPRD2["linha"] + BOLD + " Coluna: " + RESET + OPRD2["coluna"]
             flagErro = True 
@@ -392,6 +396,13 @@ def analisadorSemantico(t, A, tokensParaValidacao, TabelaSimbolos):
         textoImpressao = "while ("+ EXP_R['lexema']+"){"
         TextoArquivo.append(textoImpressao)
         imprimirTerminal("Impresso no arquivo: " + CYAN + textoImpressao + RESET)
+        
+        # Adiciona a expressão regular no corpo do loop para permitir testar 
+        # a condição repetidamente
+        if "valorEXP" in EXP_R:
+            textoImpressao = EXP_R["valorEXP"]
+            TextoArquivo.append(textoImpressao)
+            imprimirTerminal("Impresso no arquivo: " + CYAN + textoImpressao + RESET)
 
     # As próximas regras não possuem regras semânticas
 

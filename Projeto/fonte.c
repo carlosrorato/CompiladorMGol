@@ -50,6 +50,7 @@ void main(void){
 	printf("%s", A);
 	T5 = B >= 0;
 	while (T5){
+		T5 = B >= 0;
 		printf("iteracao...iterando...");
 		T6 = B - 1;
 		B = T6;
@@ -59,6 +60,7 @@ void main(void){
 			D = 2;
 			T8 = D >= 0;
 			while (T8){
+				T8 = D >= 0;
 				printf("imprimindo teste...");
 				T9 = D - 1;
 				D = T9;
